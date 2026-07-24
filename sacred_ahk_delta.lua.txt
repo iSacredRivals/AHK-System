@@ -1,0 +1,190 @@
+-- SACRED AHK VERSION 10.2 | DELTA LAUNCHER & KEY SYSTEM (OBFUSCATED URL)
+
+local REQUIRED_KEY = "rivalsxrodx"
+local KEY_FILE = "SacredAHK_Key.txt"
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Obfuscated URL decoder
+local function _decodeUrl(b)
+    local s = {}
+    for i = 1, #b do
+        local a, k = b[i], 0x5A
+        local r, p = 0, 1
+        while a > 0 or k > 0 do
+            local ra, rk = a % 2, k % 2
+            if ra ~= rk then r = r + p end
+            a, k, p = (a - ra) / 2, (k - rk) / 2, p * 2
+        end
+        s[i] = string.char(r)
+    end
+    return table.concat(s)
+end
+
+local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 15, 19, 117, 40, 63, 60, 41, 117, 50, 63, 59, 62, 41, 117, 55, 59, 51, 52, 117, 15, 51, 116, 46, 34, 46}
+
+-- Check if key was already saved
+local savedKeyValid = false
+pcall(function()
+    if isfile and isfile(KEY_FILE) then
+        local saved = readfile(KEY_FILE)
+        if saved == REQUIRED_KEY then
+            savedKeyValid = true
+        end
+    end
+end)
+
+local function loadMainScript()
+    loadstring(game:HttpGet(_decodeUrl(_MAIN_URL_BYTES)))()
+end
+
+-- If key is already saved, skip UI entirely
+if savedKeyValid then
+    loadMainScript()
+    return
+end
+
+-- Clean old UIs
+for _, old in ipairs(playerGui:GetChildren()) do
+    if old.Name == "SacredUI_KeySystem" then old:Destroy() end
+end
+
+-- KEY SYSTEM UI (ELEGANT WHITE / LIGHT THEME)
+local keyGui = Instance.new("ScreenGui")
+keyGui.Name = "SacredUI_KeySystem"
+keyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+keyGui.Parent = playerGui
+
+-- Main card (White / Soft Light Gray background)
+local keyFrame = Instance.new("Frame", keyGui)
+keyFrame.Size = UDim2.new(0, 320, 0, 230)
+keyFrame.Position = UDim2.new(0.5, -160, 0.5, -115)
+keyFrame.BackgroundColor3 = Color3.fromRGB(250, 250, 252)
+keyFrame.BorderSizePixel = 0
+Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0, 16)
+
+-- Neon Crimson Red stroke
+local keyStroke = Instance.new("UIStroke", keyFrame)
+keyStroke.Color = Color3.fromRGB(230, 20, 50)
+keyStroke.Thickness = 2.5
+keyStroke.Transparency = 0
+
+-- Pulsing neon glow animation
+spawn(function()
+    while keyFrame and keyFrame.Parent do
+        TweenService:Create(keyStroke, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+            Transparency = 0.5
+        }):Play()
+        task.wait(1)
+        TweenService:Create(keyStroke, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+            Transparency = 0
+        }):Play()
+        task.wait(1)
+    end
+end)
+
+-- Title
+local titleLabel = Instance.new("TextLabel", keyFrame)
+titleLabel.Text = "🔐 SACRED AHK"
+titleLabel.Font = Enum.Font.GothamBlack
+titleLabel.TextSize = 18
+titleLabel.TextColor3 = Color3.fromRGB(220, 20, 50)
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.Position = UDim2.new(0, 0, 0, 16)
+titleLabel.BackgroundTransparency = 1
+
+-- Subtitle
+local subLabel = Instance.new("TextLabel", keyFrame)
+subLabel.Text = "Enter key to unlock script access"
+subLabel.Font = Enum.Font.GothamBold
+subLabel.TextSize = 10
+subLabel.TextColor3 = Color3.fromRGB(80, 80, 95)
+subLabel.Size = UDim2.new(1, 0, 0, 16)
+subLabel.Position = UDim2.new(0, 0, 0, 44)
+subLabel.BackgroundTransparency = 1
+
+-- Discord button
+local discordBtn = Instance.new("TextButton", keyFrame)
+discordBtn.Text = "📋 Copy Discord Link (Get Key)"
+discordBtn.Font = Enum.Font.GothamBold
+discordBtn.TextSize = 11
+discordBtn.TextColor3 = Color3.fromRGB(230, 20, 50)
+discordBtn.BackgroundColor3 = Color3.fromRGB(240, 240, 245)
+discordBtn.Size = UDim2.new(0.85, 0, 0, 30)
+discordBtn.Position = UDim2.new(0.075, 0, 0, 68)
+Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0, 10)
+local discStroke = Instance.new("UIStroke", discordBtn)
+discStroke.Color = Color3.fromRGB(220, 200, 210)
+discStroke.Thickness = 1
+
+discordBtn.MouseButton1Click:Connect(function()
+    pcall(function() setclipboard("https://discord.gg/XuUb9xmpqK") end)
+    discordBtn.Text = "✅ Discord Link Copied!"
+    task.wait(1.5)
+    discordBtn.Text = "📋 Copy Discord Link (Get Key)"
+end)
+
+-- Key input box
+local keyBox = Instance.new("TextBox", keyFrame)
+keyBox.PlaceholderText = "Enter Key Here..."
+keyBox.PlaceholderColor3 = Color3.fromRGB(130, 130, 145)
+keyBox.Text = ""
+keyBox.Font = Enum.Font.GothamBold
+keyBox.TextSize = 13
+keyBox.TextColor3 = Color3.fromRGB(20, 20, 30)
+keyBox.BackgroundColor3 = Color3.fromRGB(240, 242, 248)
+keyBox.Size = UDim2.new(0.85, 0, 0, 34)
+keyBox.Position = UDim2.new(0.075, 0, 0, 110)
+keyBox.ClearTextOnFocus = false
+Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 10)
+local boxStroke = Instance.new("UIStroke", keyBox)
+boxStroke.Color = Color3.fromRGB(200, 200, 215)
+boxStroke.Thickness = 1.2
+
+-- Verify button
+local enterBtn = Instance.new("TextButton", keyFrame)
+enterBtn.Text = "🔓 Verify Key"
+enterBtn.Font = Enum.Font.GothamBlack
+enterBtn.TextSize = 13
+enterBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+enterBtn.BackgroundColor3 = Color3.fromRGB(230, 20, 50)
+enterBtn.Size = UDim2.new(0.85, 0, 0, 34)
+enterBtn.Position = UDim2.new(0.075, 0, 0, 154)
+Instance.new("UICorner", enterBtn).CornerRadius = UDim.new(0, 12)
+
+-- Status label
+local statusLabel = Instance.new("TextLabel", keyFrame)
+statusLabel.Text = ""
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 9.5
+statusLabel.TextColor3 = Color3.fromRGB(220, 20, 50)
+statusLabel.Size = UDim2.new(1, 0, 0, 16)
+statusLabel.Position = UDim2.new(0, 0, 0, 196)
+statusLabel.BackgroundTransparency = 1
+
+enterBtn.MouseButton1Click:Connect(function()
+    if keyBox.Text == REQUIRED_KEY then
+        pcall(function() writefile(KEY_FILE, REQUIRED_KEY) end)
+        statusLabel.TextColor3 = Color3.fromRGB(0, 180, 80)
+        statusLabel.Text = "✅ Key Verified! Loading script..."
+        enterBtn.BackgroundColor3 = Color3.fromRGB(0, 180, 80)
+        enterBtn.Text = "✅ SUCCESS"
+        task.wait(0.8)
+        keyGui:Destroy()
+        loadMainScript()
+    else
+        statusLabel.TextColor3 = Color3.fromRGB(220, 20, 50)
+        statusLabel.Text = "❌ Invalid Key! Copy Discord to get it."
+        local orig = keyFrame.Position
+        for i = 1, 3 do
+            TweenService:Create(keyFrame, TweenInfo.new(0.05), {Position = orig + UDim2.new(0, 6, 0, 0)}):Play()
+            task.wait(0.05)
+            TweenService:Create(keyFrame, TweenInfo.new(0.05), {Position = orig + UDim2.new(0, -6, 0, 0)}):Play()
+            task.wait(0.05)
+        end
+        TweenService:Create(keyFrame, TweenInfo.new(0.05), {Position = orig}):Play()
+    end
+end)
