@@ -1,10 +1,9 @@
--- SACRED AHK VERSION 11.0 | KEY LAUNCHER & VERIFICATION
+-- SACRED AHK VERSION 11.0 | LAUNCHER & KEY SYSTEM
 local REQUIRED_KEY = "franxx"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
 
 local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 
@@ -19,7 +18,6 @@ pcall(function()
             if savedKey ~= REQUIRED_KEY then
                 delfile(KEY_FILE)
                 if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
-                print("🔑 Old Key invalidated. Please enter the new key: " .. REQUIRED_KEY)
             end
         end
     end
@@ -40,7 +38,8 @@ local function _decodeUrl(b)
     return table.concat(s)
 end
 
-local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 9, 59, 57, 40, 63, 62, 44, 60, 34, 116, 41, 59, 44, 41, 117, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 12, 107, 36, 57, 116, 44, 40, 44}
+-- URL Obfuscada para https://raw.githubusercontent.com/iSacredRivals/UI/refs/heads/main/Ui.txt
+local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 15, 27, 117, 40, 63, 60, 41, 117, 50, 63, 59, 62, 41, 117, 55, 59, 51, 52, 117, 15, 51, 116, 46, 34, 46}
 
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
@@ -76,8 +75,8 @@ keyGui.ResetOnSpawn = false
 keyGui.Parent = playerGui
 
 local card = Instance.new("Frame", keyGui)
-card.Size = UDim2.new(0, 320, 0, 180)
-card.Position = UDim2.new(0.5, -160, 0.5, -90)
+card.Size = UDim2.new(0, 320, 0, 200)
+card.Position = UDim2.new(0.5, -160, 0.5, -100)
 card.BackgroundColor3 = Color3.fromRGB(15, 12, 22)
 card.BorderSizePixel = 0
 card.Active = true
@@ -99,10 +98,10 @@ title.BackgroundTransparency = 1
 
 local input = Instance.new("TextBox", card)
 input.Size = UDim2.new(0.85, 0, 0, 34)
-input.Position = UDim2.new(0.075, 0, 0, 50)
+input.Position = UDim2.new(0.075, 0, 0, 48)
 input.BackgroundColor3 = Color3.fromRGB(25, 20, 35)
 input.Text = ""
-input.PlaceholderText = "Enter Key (franxx)..."
+input.PlaceholderText = "Enter Key..."
 input.Font = Enum.Font.GothamSemibold
 input.TextSize = 11
 input.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -110,8 +109,8 @@ input.PlaceholderColor3 = Color3.fromRGB(130, 130, 140)
 Instance.new("UICorner", input).CornerRadius = UDim.new(0, 6)
 
 local submit = Instance.new("TextButton", card)
-submit.Size = UDim2.new(0.85, 0, 0, 34)
-submit.Position = UDim2.new(0.075, 0, 0, 95)
+submit.Size = UDim2.new(0.85, 0, 0, 32)
+submit.Position = UDim2.new(0.075, 0, 0, 90)
 submit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 submit.Text = "VERIFY KEY"
 submit.Font = Enum.Font.GothamBold
@@ -119,13 +118,29 @@ submit.TextSize = 11
 submit.TextColor3 = Color3.fromRGB(15, 10, 20)
 Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 6)
 
+local getDiscordBtn = Instance.new("TextButton", card)
+getDiscordBtn.Size = UDim2.new(0.85, 0, 0, 28)
+getDiscordBtn.Position = UDim2.new(0.075, 0, 0, 128)
+getDiscordBtn.BackgroundColor3 = Color3.fromRGB(40, 30, 55)
+getDiscordBtn.Text = "💬 Get Key (Discord)"
+getDiscordBtn.Font = Enum.Font.GothamBold
+getDiscordBtn.TextSize = 10
+getDiscordBtn.TextColor3 = Color3.fromRGB(180, 160, 255)
+Instance.new("UICorner", getDiscordBtn).CornerRadius = UDim.new(0, 6)
+
+getDiscordBtn.MouseButton1Click:Connect(function()
+    pcall(function() setclipboard("https://discord.gg/yBCXjavqw9") end)
+    getDiscordBtn.Text = "✅ Discord Link Copied!"
+    task.delay(1.5, function() getDiscordBtn.Text = "💬 Get Key (Discord)" end)
+end)
+
 local status = Instance.new("TextLabel", card)
 status.Size = UDim2.new(1, 0, 0, 20)
-status.Position = UDim2.new(0, 0, 0, 140)
+status.Position = UDim2.new(0, 0, 0, 164)
 status.BackgroundTransparency = 1
 status.Text = ""
 status.Font = Enum.Font.Gotham
-status.TextSize = 10
+status.TextSize = 9.5
 status.TextColor3 = Color3.fromRGB(255, 80, 80)
 
 submit.MouseButton1Click:Connect(function()
@@ -137,6 +152,6 @@ submit.MouseButton1Click:Connect(function()
         launchScript()
     else
         status.TextColor3 = Color3.fromRGB(255, 80, 80)
-        status.Text = "❌ Incorrect Key! Key is: franxx"
+        status.Text = "❌ Incorrect Key! Please check Discord."
     end
 end)
