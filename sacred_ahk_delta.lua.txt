@@ -1,16 +1,13 @@
--- SACRED AHK VERSION 11.0 | LAUNCHER & KEY SYSTEM
+-- SACRED AHK VERSION 11.0 | KEY SYSTEM & DELTA LAUNCHER
 local REQUIRED_KEY = "franxx"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
 
 local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local HttpService = game:GetService("HttpService")
-
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- Si cambio la key requerida, borrar el archivo de key antiguo y la config previa
+-- Invalida la key guardada anterior si cambio la requerida
 pcall(function()
     if isfile and readfile then
         if isfile(KEY_FILE) then
@@ -23,42 +20,12 @@ pcall(function()
     end
 end)
 
-local function _decodeUrl(b)
-    local s = {}
-    for i = 1, #b do
-        local a, k = b[i], 0x5A
-        local r, p = 0, 1
-        while a > 0 or k > 0 do
-            local ra, rk = a % 2, k % 2
-            if ra ~= rk then r = r + p end
-            a, k, p = (a - ra) / 2, (k - rk) / 2, p * 2
-        end
-        s[i] = string.char(r)
-    end
-    return table.concat(s)
-end
-
--- URL Bytes Verificados 100%: https://raw.githubusercontent.com/iSacredRivals/UI/refs/heads/main/Ui.txt
-local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 15, 19, 117, 40, 63, 60, 41, 117, 50, 63, 59, 62, 41, 117, 55, 59, 51, 52, 117, 15, 51, 116, 46, 34, 46}
-
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
         if old.Name:match("SacredKeyUI") then old:Destroy() end
     end
-    
-    local success, err = pcall(function()
-        local rawScript = game:HttpGet(_decodeUrl(_MAIN_URL_BYTES))
-        local fn, compileErr = loadstring(rawScript)
-        if fn then
-            fn()
-        else
-            warn("❌ Error compilando script de GitHub: " .. tostring(compileErr))
-        end
-    end)
-    
-    if not success then
-        warn("❌ Error al cargar script desde GitHub: " .. tostring(err))
-    end
+    -- Cargar el script principal completo desde tu enlace de GitHub
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/iSacredRivals/UI/refs/heads/main/Ui.txt"))()
 end
 
 -- Verificar si la key ya estaba guardada y es valida
@@ -161,7 +128,7 @@ submit.MouseButton1Click:Connect(function()
         status.TextColor3 = Color3.fromRGB(0, 255, 120)
         status.Text = "✅ Key Verified! Loading Script..."
         pcall(function() if writefile then writefile(KEY_FILE, REQUIRED_KEY) end end)
-        task.wait(0.6)
+        task.wait(0.5)
         launchScript()
     else
         status.TextColor3 = Color3.fromRGB(255, 80, 80)
