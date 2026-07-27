@@ -1,8 +1,29 @@
--- SACRED AHK VERSION 11.0 | KEY LAUNCHER
+-- SACRED AHK VERSION 11.0 | KEY LAUNCHER & VERIFICATION
 local REQUIRED_KEY = "franxx"
+local KEY_FILE = "SacredAHK_SavedKey.txt"
+local CONFIG_FILE = "SacredAHK_Config.json"
 
--- Cargar Script Principal desde GitHub
-local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 9, 59, 57, 40, 63, 62, 44, 60, 34, 116, 41, 59, 44, 41, 117, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 12, 107, 36, 57, 116, 44, 40, 44}
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Si cambio la key requerida, borrar el archivo de key antiguo y la config previa
+pcall(function()
+    if isfile and readfile then
+        if isfile(KEY_FILE) then
+            local savedKey = readfile(KEY_FILE)
+            if savedKey ~= REQUIRED_KEY then
+                delfile(KEY_FILE)
+                if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
+                print("🔑 Old Key invalidated. Please enter the new key: " .. REQUIRED_KEY)
+            end
+        end
+    end
+end)
 
 local function _decodeUrl(b)
     local s = {}
@@ -19,5 +40,103 @@ local function _decodeUrl(b)
     return table.concat(s)
 end
 
--- Ejecución directa verificando la Key
-loadstring(game:HttpGet(_decodeUrl(_MAIN_URL_BYTES)))()
+local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 9, 59, 57, 40, 63, 62, 44, 60, 34, 116, 41, 59, 44, 41, 117, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 12, 107, 36, 57, 116, 44, 40, 44}
+
+local function launchScript()
+    for _, old in ipairs(playerGui:GetChildren()) do
+        if old.Name:match("SacredKeyUI") then old:Destroy() end
+    end
+    loadstring(game:HttpGet(_decodeUrl(_MAIN_URL_BYTES)))()
+end
+
+-- Verificar si la key ya estaba guardada y es valida
+local alreadyValid = false
+pcall(function()
+    if isfile and readfile and isfile(KEY_FILE) then
+        if readfile(KEY_FILE) == REQUIRED_KEY then
+            alreadyValid = true
+        end
+    end
+end)
+
+if alreadyValid then
+    launchScript()
+    return
+end
+
+-- Limpiar UIs antiguas de Key
+for _, old in ipairs(playerGui:GetChildren()) do
+    if old.Name:match("SacredKeyUI") then old:Destroy() end
+end
+
+-- Interfaz de Verificación de Key
+local keyGui = Instance.new("ScreenGui")
+keyGui.Name = "SacredKeyUI"
+keyGui.ResetOnSpawn = false
+keyGui.Parent = playerGui
+
+local card = Instance.new("Frame", keyGui)
+card.Size = UDim2.new(0, 320, 0, 180)
+card.Position = UDim2.new(0.5, -160, 0.5, -90)
+card.BackgroundColor3 = Color3.fromRGB(15, 12, 22)
+card.BorderSizePixel = 0
+card.Active = true
+card.Draggable = true
+Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
+
+local stroke = Instance.new("UIStroke", card)
+stroke.Color = Color3.fromRGB(255, 255, 255)
+stroke.Thickness = 1.5
+
+local title = Instance.new("TextLabel", card)
+title.Text = "🔑 SACRED AHK KEY SYSTEM"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 13
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Position = UDim2.new(0, 0, 0, 10)
+title.BackgroundTransparency = 1
+
+local input = Instance.new("TextBox", card)
+input.Size = UDim2.new(0.85, 0, 0, 34)
+input.Position = UDim2.new(0.075, 0, 0, 50)
+input.BackgroundColor3 = Color3.fromRGB(25, 20, 35)
+input.Text = ""
+input.PlaceholderText = "Enter Key (franxx)..."
+input.Font = Enum.Font.GothamSemibold
+input.TextSize = 11
+input.TextColor3 = Color3.fromRGB(255, 255, 255)
+input.PlaceholderColor3 = Color3.fromRGB(130, 130, 140)
+Instance.new("UICorner", input).CornerRadius = UDim.new(0, 6)
+
+local submit = Instance.new("TextButton", card)
+submit.Size = UDim2.new(0.85, 0, 0, 34)
+submit.Position = UDim2.new(0.075, 0, 0, 95)
+submit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+submit.Text = "VERIFY KEY"
+submit.Font = Enum.Font.GothamBold
+submit.TextSize = 11
+submit.TextColor3 = Color3.fromRGB(15, 10, 20)
+Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 6)
+
+local status = Instance.new("TextLabel", card)
+status.Size = UDim2.new(1, 0, 0, 20)
+status.Position = UDim2.new(0, 0, 0, 140)
+status.BackgroundTransparency = 1
+status.Text = ""
+status.Font = Enum.Font.Gotham
+status.TextSize = 10
+status.TextColor3 = Color3.fromRGB(255, 80, 80)
+
+submit.MouseButton1Click:Connect(function()
+    if input.Text == REQUIRED_KEY then
+        status.TextColor3 = Color3.fromRGB(0, 255, 120)
+        status.Text = "✅ Key Verified! Loading Script..."
+        pcall(function() if writefile then writefile(KEY_FILE, REQUIRED_KEY) end end)
+        task.wait(0.6)
+        launchScript()
+    else
+        status.TextColor3 = Color3.fromRGB(255, 80, 80)
+        status.Text = "❌ Incorrect Key! Key is: franxx"
+    end
+end)
