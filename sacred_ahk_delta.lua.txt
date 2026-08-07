@@ -1,7 +1,5 @@
 
-— OPEN SOURCE SCRIPT
 
-— OPEN SOURCE SCRIPT
 
 
 local KEY_FILE = "SacredAHK_SavedKey.txt"
