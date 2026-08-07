@@ -1,3 +1,10 @@
+
+-- OPEN SOURCE SCRIPT 
+
+-- OPEN SOURCE SCRIPT
+
+-- OPEN SOURCE SCRIPT 
+
 -- ============================================================
 -- SACRED AHK VERSION 12 | LOCAL DEV STANDALONE
 -- ============================================================
