@@ -1,1 +1,159 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"))()
+
+— OPEN SOURCE SCRIPT
+
+— OPEN SOURCE SCRIPT
+
+
+local KEY_FILE = "SacredAHK_SavedKey.txt"
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Limpiar key vieja si existe
+pcall(function()
+    if isfile and readfile and isfile(KEY_FILE) then
+        local savedKey = readfile(KEY_FILE) or ""
+        local cleanSaved = string.lower(string.gsub(savedKey, "%s+", ""))
+        local cleanRequired = string.lower(string.gsub("sacred", "%s+", ""))
+        if cleanSaved ~= cleanRequired then
+            if writefile then
+                writefile(KEY_FILE, "")
+            end
+            if delfile then
+                delfile(KEY_FILE)
+            end
+        end
+    end
+end)
+
+local function launchScript()
+    for _, old in ipairs(playerGui:GetChildren()) do
+        if old.Name:match("SacredUI") then
+            old:Destroy()
+        end
+    end
+    local url = "https://raw.githubusercontent.com/iSacredRivals/AHK-/main/AHKMOBILE.lua"
+    (loadstring(game:HttpGet(url)))()
+end
+
+local alreadyValid = false
+pcall(function()
+    if isfile and readfile and isfile(KEY_FILE) then
+        local savedKey = readfile(KEY_FILE) or ""
+        local cleanSaved = string.lower(string.gsub(savedKey, "%s+", ""))
+        local cleanRequired = string.lower(string.gsub("sacred", "%s+", ""))
+        if cleanSaved == cleanRequired and cleanSaved ~= "" then
+            alreadyValid = true
+        end
+    end
+end)
+
+if alreadyValid then
+    launchScript()
+    return
+end
+
+for _, old in ipairs(playerGui:GetChildren()) do
+    if old.Name:match("SacredKeyUI") then
+        old:Destroy()
+    end
+end
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SacredKeyUI"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Size = UDim2.new(0, 0, 0, 0)
+mainFrame.Position = UDim2.new(0.5, -190, 0.5, -110)
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 10, 20)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 8)
+
+local uiStroke = Instance.new("UIStroke", mainFrame)
+uiStroke.Color = Color3.fromRGB(255, 0, 50)
+uiStroke.Thickness = 1.6
+
+local title = Instance.new("TextLabel", mainFrame)
+title.Text = "✨ Sacred AHK"
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 15
+title.TextColor3 = Color3.fromRGB(255, 0, 50)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Position = UDim2.new(0, 0, 0, 8)
+title.BackgroundTransparency = 1
+
+local keyInput = Instance.new("TextBox", mainFrame)
+keyInput.Size = UDim2.new(.85, 0, 0, 35)
+keyInput.Position = UDim2.new(.075, 0, 0, 45)
+keyInput.BackgroundColor3 = Color3.fromRGB(25, 20, 35)
+keyInput.Text = ""
+keyInput.PlaceholderText = "Enter Key Here..."
+keyInput.Font = Enum.Font.GothamBold
+keyInput.TextSize = 11
+keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyInput.PlaceholderColor3 = Color3.fromRGB(140, 140, 150)
+keyInput.ClearTextOnFocus = false
+Instance.new("UICorner", keyInput).CornerRadius = UDim.new(0, 6)
+
+local verifyBtn = Instance.new("TextButton", mainFrame)
+verifyBtn.Size = UDim2.new(.4, 0, 0, 30)
+verifyBtn.Position = UDim2.new(.075, 0, 0, 90)
+verifyBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+verifyBtn.Text = "VERIFY KEY"
+verifyBtn.Font = Enum.Font.GothamBlack
+verifyBtn.TextSize = 10
+verifyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", verifyBtn).CornerRadius = UDim.new(0, 6)
+
+local discordBtn = Instance.new("TextButton", mainFrame)
+discordBtn.Size = UDim2.new(.4, 0, 0, 30)
+discordBtn.Position = UDim2.new(.525, 0, 0, 90)
+discordBtn.BackgroundColor3 = Color3.fromRGB(35, 28, 50)
+discordBtn.Text = "Get Key (Discord)"
+discordBtn.Font = Enum.Font.GothamBold
+discordBtn.TextSize = 10
+discordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0, 6)
+
+local statusLabel = Instance.new("TextLabel", mainFrame)
+statusLabel.Size = UDim2.new(1, -20, 0, 20)
+statusLabel.Position = UDim2.new(0, 10, 0, 130)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = ""
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 10
+statusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
+statusLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+discordBtn.MouseButton1Click:Connect(function()
+    pcall(function()
+        setclipboard("https://discord.gg/fp3kZMBuvW")
+    end)
+    statusLabel.Text = "Link copied to clipboard!"
+    task.delay(2, function()
+        statusLabel.Text = ""
+    end)
+end)
+
+verifyBtn.MouseButton1Click:Connect(function()
+    local userKey = string.lower(string.gsub(keyInput.Text, "%s+", ""))
+    local requiredKey = string.lower(string.gsub("sacred", "%s+", ""))
+    if userKey == requiredKey then
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 120)
+        statusLabel.Text = "✅ Key Verified! Loading Script..."
+        pcall(function()
+            if writefile then
+                writefile(KEY_FILE, "sacred")
+            end
+        end)
+        task.wait(0.5)
+        launchScript()
+    else
+        statusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
+        statusLabel.Text = "❌ Incorrect Key! Check Discord."
+    end
+end)
