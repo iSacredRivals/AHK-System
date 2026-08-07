@@ -1,6 +1,15 @@
 -- ============================================================
 -- SACRED AHK VERSION 12.0 | FINAL SINGLE LOADER
 -- ============================================================
+
+
+-- OPEN SOURCE SCRIPT
+
+-- OPEN SOURCE SCRIPT
+
+-- OPEN SOURCE SCRIPT
+
+
 local REQUIRED_KEY = "sacred"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
@@ -23,7 +32,6 @@ pcall(function()
     end
 end)
 
--- LINK RAW DE GITHUB (Asegúrate de que Ui.txt tenga el código LIMPIO sin osfuscación)
 local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
 
 local function launchScript()
@@ -247,7 +255,7 @@ getStartedBtn.MouseButton1Click:Connect(function()
 end)
 
 getDiscordBtn.MouseButton1Click:Connect(function()
-    pcall(function() setclipboard("https://discord.gg/rivals") end)
+    pcall(function() setclipboard("https://discord.gg/H5DchPAt3") end)
     status.TextColor3 = Color3.fromRGB(0, 255, 120)
     status.Text = isSpanish and "¡Link copiado!" or "Link copied!"
     task.delay(2, function() status.Text = "" end)
