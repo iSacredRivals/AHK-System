@@ -1,48 +1,52 @@
-
-
-
-
+-- ============================================================
+-- SACRED AHK VERSION 12.0 | FINAL SINGLE LOADER
+-- ============================================================
+local REQUIRED_KEY = "sacred"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local CONFIG_FILE = "SacredAHK_Config.json"
 
--- Limpiar key vieja si existe
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+
+local player = Players.LocalPlayer or Players:FindFirstChildOfClass("Player")
+local playerGui = player:WaitForChild("PlayerGui", 10)
+
 pcall(function()
-    if isfile and readfile and isfile(KEY_FILE) then
-        local savedKey = readfile(KEY_FILE) or ""
-        local cleanSaved = string.lower(string.gsub(savedKey, "%s+", ""))
-        local cleanRequired = string.lower(string.gsub("sacred", "%s+", ""))
-        if cleanSaved ~= cleanRequired then
-            if writefile then
-                writefile(KEY_FILE, "")
-            end
-            if delfile then
+    if isfile and readfile then
+        if isfile(KEY_FILE) then
+            local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
+            if savedKey ~= REQUIRED_KEY then
                 delfile(KEY_FILE)
+                if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
             end
         end
     end
 end)
 
+-- LINK RAW DE GITHUB (Asegúrate de que Ui.txt tenga el código LIMPIO sin osfuscación)
+local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
+
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
-        if old.Name:match("SacredUI") then
-            old:Destroy()
-        end
+        if old.Name:match("SacredKeyUI") or old.Name:match("SacredUI") then old:Destroy() end
     end
-    local url = "https://raw.githubusercontent.com/iSacredRivals/AHK-/main/AHKMOBILE.lua"
-    (loadstring(game:HttpGet(url)))()
+    
+    pcall(function()
+        local rawScript = game:HttpGet(SCRIPT_URL)
+        local fn, compileErr = loadstring(rawScript)
+        if fn then
+            fn()
+        else
+            warn("❌ Error compilando script de GitHub: " .. tostring(compileErr))
+        end
+    end)
 end
 
 local alreadyValid = false
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
-        local savedKey = readfile(KEY_FILE) or ""
-        local cleanSaved = string.lower(string.gsub(savedKey, "%s+", ""))
-        local cleanRequired = string.lower(string.gsub("sacred", "%s+", ""))
-        if cleanSaved == cleanRequired and cleanSaved ~= "" then
-            alreadyValid = true
-        end
+        local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
+        if savedKey == REQUIRED_KEY then alreadyValid = true end
     end
 end)
 
@@ -51,107 +55,214 @@ if alreadyValid then
     return
 end
 
+-- ============================================================
+-- UI SYSTEM
+-- ============================================================
 for _, old in ipairs(playerGui:GetChildren()) do
-    if old.Name:match("SacredKeyUI") then
-        old:Destroy()
-    end
+    if old.Name:match("SacredKeyUI") then old:Destroy() end
 end
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "SacredKeyUI"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = playerGui
-
-local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Size = UDim2.new(0, 0, 0, 0)
-mainFrame.Position = UDim2.new(0.5, -190, 0.5, -110)
-mainFrame.BackgroundColor3 = Color3.fromRGB(15, 10, 20)
-mainFrame.BorderSizePixel = 0
-mainFrame.Active = true
-mainFrame.Draggable = true
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 8)
-
-local uiStroke = Instance.new("UIStroke", mainFrame)
-uiStroke.Color = Color3.fromRGB(255, 0, 50)
-uiStroke.Thickness = 1.6
-
-local title = Instance.new("TextLabel", mainFrame)
-title.Text = "✨ Sacred AHK"
-title.Font = Enum.Font.GothamBlack
-title.TextSize = 15
-title.TextColor3 = Color3.fromRGB(255, 0, 50)
-title.Size = UDim2.new(1, 0, 0, 30)
-title.Position = UDim2.new(0, 0, 0, 8)
-title.BackgroundTransparency = 1
-
-local keyInput = Instance.new("TextBox", mainFrame)
-keyInput.Size = UDim2.new(.85, 0, 0, 35)
-keyInput.Position = UDim2.new(.075, 0, 0, 45)
-keyInput.BackgroundColor3 = Color3.fromRGB(25, 20, 35)
-keyInput.Text = ""
-keyInput.PlaceholderText = "Enter Key Here..."
-keyInput.Font = Enum.Font.GothamBold
-keyInput.TextSize = 11
-keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-keyInput.PlaceholderColor3 = Color3.fromRGB(140, 140, 150)
-keyInput.ClearTextOnFocus = false
-Instance.new("UICorner", keyInput).CornerRadius = UDim.new(0, 6)
-
-local verifyBtn = Instance.new("TextButton", mainFrame)
-verifyBtn.Size = UDim2.new(.4, 0, 0, 30)
-verifyBtn.Position = UDim2.new(.075, 0, 0, 90)
-verifyBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
-verifyBtn.Text = "VERIFY KEY"
-verifyBtn.Font = Enum.Font.GothamBlack
-verifyBtn.TextSize = 10
-verifyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-Instance.new("UICorner", verifyBtn).CornerRadius = UDim.new(0, 6)
-
-local discordBtn = Instance.new("TextButton", mainFrame)
-discordBtn.Size = UDim2.new(.4, 0, 0, 30)
-discordBtn.Position = UDim2.new(.525, 0, 0, 90)
-discordBtn.BackgroundColor3 = Color3.fromRGB(35, 28, 50)
-discordBtn.Text = "Get Key (Discord)"
-discordBtn.Font = Enum.Font.GothamBold
-discordBtn.TextSize = 10
-discordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0, 6)
-
-local statusLabel = Instance.new("TextLabel", mainFrame)
-statusLabel.Size = UDim2.new(1, -20, 0, 20)
-statusLabel.Position = UDim2.new(0, 10, 0, 130)
-statusLabel.BackgroundTransparency = 1
-statusLabel.Text = ""
-statusLabel.Font = Enum.Font.GothamBold
-statusLabel.TextSize = 10
-statusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
-statusLabel.TextXAlignment = Enum.TextXAlignment.Center
-
-discordBtn.MouseButton1Click:Connect(function()
-    pcall(function()
-        setclipboard("https://discord.gg/fp3kZMBuvW")
-    end)
-    statusLabel.Text = "Link copied to clipboard!"
-    task.delay(2, function()
-        statusLabel.Text = ""
-    end)
+local isSpanish = false
+pcall(function()
+    local loc = game:GetService("LocalizationService").RobloxLocaleId
+    if loc and string.find(string.lower(loc), "es") then isSpanish = true end
 end)
 
-verifyBtn.MouseButton1Click:Connect(function()
-    local userKey = string.lower(string.gsub(keyInput.Text, "%s+", ""))
-    local requiredKey = string.lower(string.gsub("sacred", "%s+", ""))
-    if userKey == requiredKey then
-        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 120)
-        statusLabel.Text = "✅ Key Verified! Loading Script..."
-        pcall(function()
-            if writefile then
-                writefile(KEY_FILE, "sacred")
-            end
-        end)
-        task.wait(0.5)
+local launcherGui = Instance.new("ScreenGui")
+launcherGui.Name = "SacredKeyUI"
+launcherGui.ResetOnSpawn = false
+launcherGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+launcherGui.Parent = playerGui
+
+-- 1. COMPACT POPUP
+local popFrame = Instance.new("Frame", launcherGui)
+popFrame.Name = "SacredUpdatePopup"
+popFrame.AutomaticSize = Enum.AutomaticSize.XY
+popFrame.Size = UDim2.new(0, 0, 0, 0)
+popFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+popFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+popFrame.BackgroundColor3 = Color3.fromRGB(12, 10, 20)
+popFrame.BorderSizePixel = 0
+popFrame.Active = true
+popFrame.Draggable = true
+
+Instance.new("UICorner", popFrame).CornerRadius = UDim.new(0, 16)
+local popStroke = Instance.new("UIStroke", popFrame)
+popStroke.Color = Color3.fromRGB(255, 0, 50)
+popStroke.Thickness = 1.2
+
+local popPadding = Instance.new("UIPadding", popFrame)
+popPadding.PaddingTop = UDim.new(0, 12)
+popPadding.PaddingBottom = UDim.new(0, 12)
+popPadding.PaddingLeft = UDim.new(0, 14)
+popPadding.PaddingRight = UDim.new(0, 14)
+
+local popLayout = Instance.new("UIListLayout", popFrame)
+popLayout.SortOrder = Enum.SortOrder.LayoutOrder
+popLayout.Padding = UDim.new(0, 6)
+popLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+local langBtn = Instance.new("TextButton", popFrame)
+langBtn.Size = UDim2.new(0, 50, 0, 20)
+langBtn.BackgroundColor3 = Color3.fromRGB(30, 25, 45)
+langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
+langBtn.Font = Enum.Font.GothamBold
+langBtn.TextSize = 9
+langBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+langBtn.LayoutOrder = 0
+Instance.new("UICorner", langBtn).CornerRadius = UDim.new(0, 6)
+
+local popTitle = Instance.new("TextLabel", popFrame)
+popTitle.AutomaticSize = Enum.AutomaticSize.XY
+popTitle.BackgroundTransparency = 1
+popTitle.Text = "✨ Update 12"
+popTitle.Font = Enum.Font.GothamBlack
+popTitle.TextSize = 15
+popTitle.TextColor3 = Color3.fromRGB(255, 0, 50)
+popTitle.LayoutOrder = 1
+
+local popWarning = Instance.new("TextLabel", popFrame)
+popWarning.AutomaticSize = Enum.AutomaticSize.Y
+popWarning.Size = UDim2.new(0, 230, 0, 0)
+popWarning.BackgroundTransparency = 1
+popWarning.Font = Enum.Font.GothamBlack
+popWarning.TextSize = 8.5
+popWarning.TextColor3 = Color3.fromRGB(255, 255, 0)
+popWarning.TextWrapped = true
+popWarning.TextXAlignment = Enum.TextXAlignment.Center
+popWarning.LayoutOrder = 2
+popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
+
+local popContent = Instance.new("TextLabel", popFrame)
+popContent.AutomaticSize = Enum.AutomaticSize.Y
+popContent.Size = UDim2.new(0, 230, 0, 0)
+popContent.BackgroundTransparency = 1
+popContent.Font = Enum.Font.GothamBold
+popContent.TextSize = 8.5
+popContent.TextColor3 = Color3.fromRGB(200, 200, 200)
+popContent.TextWrapped = true
+popContent.TextXAlignment = Enum.TextXAlignment.Left
+popContent.TextYAlignment = Enum.TextYAlignment.Top
+popContent.LayoutOrder = 3
+
+if isSpanish then
+    popContent.Text = "Se arreglaron bugs. Sanguine Z manual/auto deshabilitado temporalmente. Cosas como Soul Guitar glitch aún funcionan sin widget. Dudas o sugerencias a mi Discord."
+else
+    popContent.Text = "Bug fixes added. Sanguine Z manual/auto disabled temporarily! Some things like Soul Guitar glitch still work without widget. Suggestions or questions to my Discord."
+end
+
+local getStartedBtn = Instance.new("TextButton", popFrame)
+getStartedBtn.Size = UDim2.new(0, 120, 0, 28)
+getStartedBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
+getStartedBtn.Font = Enum.Font.GothamBlack
+getStartedBtn.TextSize = 10
+getStartedBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getStartedBtn.LayoutOrder = 4
+Instance.new("UICorner", getStartedBtn).CornerRadius = UDim.new(0, 8)
+
+-- 2. KEY SYSTEM
+local keyCard = Instance.new("Frame", launcherGui)
+keyCard.Size = UDim2.new(0, 320, 0, 180)
+keyCard.Position = UDim2.new(0.5, -160, 0.5, -90)
+keyCard.BackgroundColor3 = Color3.fromRGB(12, 10, 20)
+keyCard.BorderSizePixel = 0
+keyCard.Active = true
+keyCard.Draggable = true
+keyCard.Visible = false
+Instance.new("UICorner", keyCard).CornerRadius = UDim.new(0, 16)
+local keyStroke = Instance.new("UIStroke", keyCard)
+keyStroke.Color = Color3.fromRGB(255, 0, 50)
+keyStroke.Thickness = 1.2
+
+local keyTitle = Instance.new("TextLabel", keyCard)
+keyTitle.Text = "🔑 KEY SYSTEM"
+keyTitle.Font = Enum.Font.GothamBlack
+keyTitle.TextSize = 13
+keyTitle.TextColor3 = Color3.fromRGB(255, 0, 50)
+keyTitle.Size = UDim2.new(1, 0, 0, 25)
+keyTitle.Position = UDim2.new(0, 0, 0, 10)
+keyTitle.BackgroundTransparency = 1
+
+local input = Instance.new("TextBox", keyCard)
+input.Size = UDim2.new(0.9, 0, 0, 30)
+input.Position = UDim2.new(0.05, 0, 0, 42)
+input.BackgroundColor3 = Color3.fromRGB(22, 18, 32)
+input.Text = ""
+input.PlaceholderText = isSpanish and "Key aquí..." or "Key here..."
+input.Font = Enum.Font.GothamBold
+input.TextSize = 10
+input.TextColor3 = Color3.fromRGB(255, 255, 255)
+input.PlaceholderColor3 = Color3.fromRGB(140, 140, 150)
+input.ClearTextOnFocus = false
+Instance.new("UICorner", input).CornerRadius = UDim.new(0, 6)
+
+local submit = Instance.new("TextButton", keyCard)
+submit.Size = UDim2.new(0.45, 0, 0, 28)
+submit.Position = UDim2.new(0.05, 0, 0, 80)
+submit.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+submit.Text = isSpanish and "VERIFICAR" or "VERIFY"
+submit.Font = Enum.Font.GothamBlack
+submit.TextSize = 9
+submit.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 6)
+
+local getDiscordBtn = Instance.new("TextButton", keyCard)
+getDiscordBtn.Size = UDim2.new(0.45, 0, 0, 28)
+getDiscordBtn.Position = UDim2.new(0.5, 0, 0, 80)
+getDiscordBtn.BackgroundColor3 = Color3.fromRGB(35, 28, 50)
+getDiscordBtn.Text = "💬 Discord"
+getDiscordBtn.Font = Enum.Font.GothamBold
+getDiscordBtn.TextSize = 9
+getDiscordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", getDiscordBtn).CornerRadius = UDim.new(0, 6)
+
+local status = Instance.new("TextLabel", keyCard)
+status.Size = UDim2.new(1, -20, 0, 20)
+status.Position = UDim2.new(0, 10, 0, 115)
+status.BackgroundTransparency = 1
+status.Text = ""
+status.Font = Enum.Font.GothamBold
+status.TextSize = 8.5
+status.TextColor3 = Color3.fromRGB(255, 60, 60)
+status.TextXAlignment = Enum.TextXAlignment.Center
+
+langBtn.MouseButton1Click:Connect(function()
+    isSpanish = not isSpanish
+    langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
+    getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
+    input.PlaceholderText = isSpanish and "Key aquí..." or "Key here..."
+    submit.Text = isSpanish and "VERIFICAR" or "VERIFY"
+    popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
+    if isSpanish then
+        popContent.Text = "Se arreglaron bugs. Sanguine Z manual/auto deshabilitado temporalmente. Cosas como Soul Guitar glitch aún funcionan sin widget. Dudas o sugerencias a mi Discord."
+    else
+        popContent.Text = "Bug fixes added. Sanguine Z manual/auto disabled temporarily! Some things like Soul Guitar glitch still work without widget. Suggestions or questions to my Discord."
+    end
+end)
+
+getStartedBtn.MouseButton1Click:Connect(function()
+    popFrame.Visible = false
+    keyCard.Visible = true
+end)
+
+getDiscordBtn.MouseButton1Click:Connect(function()
+    pcall(function() setclipboard("https://discord.gg/rivals") end)
+    status.TextColor3 = Color3.fromRGB(0, 255, 120)
+    status.Text = isSpanish and "¡Link copiado!" or "Link copied!"
+    task.delay(2, function() status.Text = "" end)
+end)
+
+submit.MouseButton1Click:Connect(function()
+    local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
+    if userKey == REQUIRED_KEY then
+        status.TextColor3 = Color3.fromRGB(0, 255, 120)
+        status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
+        pcall(function() if writefile then writefile(KEY_FILE, REQUIRED_KEY) end end)
+        task.wait(0.4)
+        launcherGui:Destroy()
         launchScript()
     else
-        statusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
-        statusLabel.Text = "❌ Incorrect Key! Check Discord."
+        player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
     end
 end)
