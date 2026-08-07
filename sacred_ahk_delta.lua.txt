@@ -1,445 +1,286 @@
--- osfuscated by sacred osfuscator
-local d = {
-		"Dq!_u68rB/)p0/DkSf<hmnOH[9SC",
-		"D\\I%qdpV6j8jt",
-		"DSUB(",
-		"D-KLu!",
-		"DF4YtZp0:8\"\\YPqN8BY45IK*[*.lW/FR+lEsJYhg-no,1",
-		"Dq!_u68rB9Z9&>J",
-		"DlF#=\'8,C<&8-t!gS5*C0?R",
-		"Dq53Go",
-		"D\\I%qdP`mk",
-		"DqU*O7Z8[!=JI@*b",
-		"D-K\'X,8[",
-		"D-dQgs.q,m,Sn<[)jo@",
-		"DlF#=\'8,C<&8-t!78%Dl",
-		"D\\jXEMJNi:k",
-		"DBAGd+IR/=BqZQ)di)ZK\"p?q&Iq!<2&-TL",
-		"Dl4BR%Sg9",
-		"D\\I%qdq53Go",
-		"Dl?T<Q",
-		"D\\jOGdJNE[n",
-		"DlF#=N8hjl:R:",
-		"D9.`L+",
-		"DR=,CTZH\"*+8T+@XSch8.R0F;jPl0_F.\\=W-L\\",
-		"Dq!_u68rB/)p0/6I9]9MK8%EB\'9tK",
-		"D8Os4EqZ1]",
-		"DRPnLk",
-		"DF4YtZP)X3GSch8MpGfR>I.j#!R\"lc&",
-		"D-dQgs.q,`ejo@",
-		"DF4;HQThD26JNG:2Z\\Z0c9XIq#8%ES0ZH\"Z>Z3OL0ISN??jVH",
-		"D\\I%qdPaP!aJ7!",
-		"DP(`(Q9]j",
-		"D.mtl\"",
-		"D\\3cBW-h4_E-pg",
-		"DlFjSoZSiaM",
-		"D\\I%qdPCrR;ScE",
-		"DPaP!aJK",
-		"Dq5#Fa8,)(7R:",
-		"DP&;3gR0i-N8[",
-		"DlF#=N8hSo",
-		"DjFAQnJK",
-		"Dp=IJejc(m6[(S<",
-		"D\\IO&%j\'$3kJd",
-		"DBAG;ZI.4<YI8Pp\"IAgK;Z/p+n8?-",
-		"D",
-		"DjF*P#9X2X9.d2`",
-		"D-dQgs.qG",
-		"DPAZ8`RP]XiSUNI=jFA`\'",
-		"DPa-<s8hj>K8T+?+",
-		"D8-trN9;",
-		"Dp;9nm8VlQtZS;]VP^XU[jR",
-		"D\\I%qd",
-		"DP`X$h8hj3:[AtO597/>",
-		"D+2/r",
-		"DPAZ8`RP]XiSUN35.q3b@.\\EX*.*f",
-		"D-q!L^Ja5(!9me3]",
-	};
-for t, A in ipairs({ { -659509 - (-659510), 942877587 % 5579157 }, { 331529 + -331528, 629587254 % 5939502 }, { 194891118 % 7795643, 1591478952 % 13044909 } }) do
-	while A[2257305247 % 9289322] < A[2215406408 % 9508182] do
-		d[A[27023699 % 1039373]], d[A[-685892 - (-685894)]], A[-868376 - (-868377)], A[1288449935 % 13282989] = d[A[108807 - 108805]], d[A[-200620 - (-200621)]], A[865325665 % 9013809] + (-504533 + 504534), A[214614 - 214612] - (-563795 + 563796);
-	end;
-end;
-local function R(t)
-	return d[t - (441609 - 403093)];
-end;
-do
-	local t = string.sub;
-	local A = string.len;
-	local s = table.insert;
-	local O = math.floor;
-	local P = d;
-	local D = type;
-	local q = {
-			t = 90878750 % 1298267,
-			G = 467373 - 467326,
-			["<"] = 386549415 % 2045235,
-			g = 356744314 % 1838888,
-			H = -764973 - (-764975),
-			[":"] = -272719 + 272782,
-			Z = 790479 - 790442,
-			j = 1581904176 % 8691781,
-			Q = 2515595973 % 13671717,
-			["?"] = -721568 + 721584,
-			["`"] = 3925430057 % 16775342,
-			["]"] = -216059 - (-216063),
-			m = 809307887 % 3503497,
-			a = 761554587 % 6923223,
-			["\'"] = 1122977794 % 15175375,
-			o = -513490 + 513561,
-			S = -465636 - (-465671),
-			c = 660862 - 660793,
-			["."] = 706070911 % 15690464,
-			["("] = 2029661497 % 10199304,
-			["$"] = 442201 - 442125,
-			[";"] = 470034605 % 6714779,
-			["\""] = 22804184 % 325773,
-			["="] = -183716 + 183764,
-			q = 501728922 % 3300848,
-			[")"] = 1208942361 % 5016358,
-			V = 51958 + -51912,
-			p = 136221 - 136197,
-			["!"] = 1270525806 % 6021449,
-			["6"] = 791091 + -791038,
-			l = -605008 - (-605033),
-			["\\"] = -842095 + 842122,
-			B = 900361527 % 7829230,
-			X = -917569 + 917648,
-			_ = -925750 - (-925823),
-			["-"] = -421866 + 421888,
-			["4"] = 852972127 % 13539239,
-			["0"] = -251797 - (-251816),
-			["5"] = -198904 - (-198972),
-			["%"] = 782582452 % 8695360,
-			k = 748230 - 748222,
-			A = -856375 - (-856403),
-			["^"] = -369544 + 369600,
-			N = 47265 + -47199,
-			Y = 834453 + -834388,
-			e = 2396025675 % 13613782,
-			["["] = 702951719 % 4393448,
-			M = -677706 + 677723,
-			b = 374879609 % 2059778,
-			["/"] = 583694087 % 4946560,
-			K = 372152 - 372098,
-			["&"] = -954906 - (-954990),
-			[","] = 564800 + -564750,
-			[">"] = -429599 + 429657,
-			I = -453434 + 453444,
-			C = 83900874 % 1062036,
-			F = -12502 - (-12574),
-			n = 760665359 % 4610093,
-			["2"] = 1125338019 % 12787932,
-			T = 633642 - 633619,
-			["3"] = -198820 - (-198881),
-			O = 1046949286 % 6086914,
-			E = 76952861 % 405015,
-			L = -629430 - (-629448),
-			U = 196589 + -196549,
-			["@"] = 203541844 % 1769929,
-			D = -34332 + 34337,
-			["*"] = 175460 - 175378,
-			P = 26533231 % 13266605,
-			s = 774806 + -774744,
-			J = 259465860 % 8108307,
-			["#"] = 292211 + -292205,
-			["8"] = 120463 + -120431,
-			["7"] = -143628 + 143687,
-			i = 722125 + -722105,
-			["1"] = 111762796 % 9313561,
-			h = 1794968189 % 8506958,
-			W = 297667 + -297612,
-			d = 635853 - 635772,
-			["9"] = 707425 - 707387,
-			u = 116228295 % 2075505,
-			["+"] = 1558316275 % 9678983,
-			r = 647553 + -647504,
-			R = 158665579 % 1117363,
-			f = -735981 + 736022,
-		};
-	local y = table.concat;
-	local w = string.char;
-	local G = {
-			Q = -486421 - (-486481),
-			D = -154980 - (-155011),
-			L = 200834512 % 5738128,
-			U = -262213 + 262274,
-			["4"] = -781524 - (-781577),
-			O = 154449953 % 2451586,
-			s = -428063 + 428065,
-			I = -657149 + 657172,
-			v = 657719983 % 15295813,
-			k = 513306 - 513251,
-			["9"] = 337764 - 337714,
-			H = 691788499 % 8984266,
-			d = 555845 - 555831,
-			J = -959578 + 959611,
-			X = -760399 + 760450,
-			r = -957514 - (-957532),
-			["/"] = 377230 + -377210,
-			["7"] = 1107649251 % 5860578,
-			K = 2073142083 % 9509826,
-			x = 2246 - 2235,
-			Y = 1466496765 % 15940182,
-			C = -263429 - (-263478),
-			G = 466432 + -466427,
-			t = 165743029 % 1744663,
-			u = 720716 - 720678,
-			y = 634253 + -634241,
-			w = -673877 - (-673896),
-			["6"] = 482321 + -482276,
-			M = 492318 - 492271,
-			P = 937297 + -937271,
-			o = 222742 - 222717,
-			i = 484118 + -484115,
-			j = 810371 + -810334,
-			B = 581046 + -581000,
-			["5"] = 242192 - 242191,
-			Z = 521727 - 521665,
-			["2"] = -396295 - (-396323),
-			S = 627078 % 3151,
-			q = -54312 + 54366,
-			["1"] = 3076666667 % 12356091,
-			m = 25847 - 25841,
-			e = 1744923446 % 12288193,
-			E = 498325 + -498273,
-			A = 591441 + -591385,
-			c = 1077104302 % 16319762,
-			n = 125996 + -125953,
-			F = 114062 + -114055,
-			["+"] = 714320454 % 12987644,
-			a = 403729 - 403716,
-			z = -314459 + 314486,
-			W = -662514 - (-662530),
-			p = 572191 - 572150,
-			N = 266260 - 266202,
-			V = -612063 + 612105,
-			g = 386381 - 386342,
-			T = 253901 - 253871,
-			R = -980865 - (-980887),
-			["8"] = 17537431 % 2192171,
-			l = -650972 + 651031,
-			["3"] = -1033230 + 1033287,
-			h = 274747 + -274747,
-			["0"] = 234852 - 234816,
-			b = -506639 - (-506643),
-			f = 245745624 % 1342872,
-		};
-	for C = -713739 - (-713740), #P, 1175140572 % 5905229 do
-		local e = P[C];
-		if D(e) == "string" then
-			local D = t(e, 257581825 % 16098864, -373563 - (-373564));
-			if D == "*" then
-				e = t(e, 1002235 - 1002233);
-				local D = A(e);
-				local q = {};
-				local Z = 117765241 % 2944131;
-				local K = 1336540284 % 15362532;
-				local H = 25795 + -25795;
-				while Z <= D do
-					local A = t(e, Z, Z);
-					local P = G[A];
-					if P then
-						K = K + P * ((-571240 - (-571304)) ^ (((-600679 + 600682) - H)));
-						H = H + (-157933 + 157934);
-						if H == -451825 - (-451829) then
-							H = 471766 + -471766;
-							local t = O(K / (553393 + -487857));
-							local A = O((K % (-922916 - (-988452))) / (1005580861 % 10585059));
-							local P = K % (200977728 % 12561092);
-							s(q, w(t, A, P));
-							K = 2059603168 % 9194657;
-						end;
-					elseif A == "=" then
-						s(q, w(O(K / (-23224 - (-88760)))));
-						if Z >= D or t(e, Z + (-469425 + 469426), Z + (143973 - 143972)) ~= "=" then
-							s(q, w(O((K % (182886796 % 5897460)) / (786591 + -786335))));
-						end;
-						break;
-					end;
-					Z = Z + (-368813 + 368814);
-				end;
-				P[C] = y(q);
-			elseif D == "D" then
-				e = t(e, 1582562234 % 7757658);
-				local D = A(e);
-				local G = {};
-				local Z = 71076 - 71075;
-				while Z <= D do
-					local A = (D - Z) + (361550 - 361549);
-					local P = A >= -483395 + 483400 and 426057 - 426052 or A;
-					local y = -769598 + 769598;
-					local C = P > 359857 + -359856;
-					for A = 709646 + -709646, -174600 + 174604, 1032472 - 1032471 do
-						local s;
-						if A < P then
-							local O = t(e, Z + A, Z + A);
-							s = q[O];
-							if not s then
-								C = false;
-								break;
-							end;
-						else
-							s = 1837001664 % 13028380;
-						end;
-						y = y * (-743629 - (-743714)) + s;
-					end;
-					if C then
-						local t = O(y / (2136384244 % 21410172)) % (378552 - 378296);
-						local A = O(y / (284841 - 219305)) % (891343 - 891087);
-						local D = O(y / (1667136876 % 9806686)) % (-533927 + 534183);
-						local q = y % (-142300 - (-142556));
-						if P == -843708 - (-843713) then
-							s(G, w(t, A, D, q));
-						elseif P == 238235 + -238231 then
-							s(G, w(t, A, D));
-						elseif P == 588408768 % 5603893 then
-							s(G, w(t, A));
-						elseif P == 72639 + -72637 then
-							s(G, w(t));
-						end;
-					end;
-					Z = Z + P;
-				end;
-				P[C] = y(G);
-			end;
-		end;
-	end;
-end;
-local t = R(338762584 % 12097287);
-local A = R(272975247 % 13646836);
-local s = R(-912835 - (-951394));
-local O = game:GetService(R(1927057210 % 13198758));
-local P = O[R(791417784 % 11637930)];
-local D = P:WaitForChild(R(214251282 % 2894767));
-pcall(function(...)
-	if isfile and (readfile and isfile(A)) then
-		local s = readfile(A) or R(966796742 % 8406593);
-		local O = string[R(1213299851 % 4814529)](string[R(17138754 % 228003)](s, R(915754 - 877198), R(491467 + -452920)));
-		local P = string[R(789482 + -750939)](string[R(-314974 - (-353503))](t, R(413099 + -374543), R(-677342 - (-715889))));
-		if O ~= P then
-			if writefile then
-				writefile(A, R(-498086 - (-536633)));
-			end;
-			if delfile then
-				delfile(A);
-			end;
-		end;
-	end;
-end);
-local function q(...)
-	for t, A in ipairs(D:GetChildren()) do
-		if A[R(-771764 - (-810286))]:match(R(157037 - 118473)) then
-			A:Destroy();
-		end;
-	end;
-	local t = string[R(760516 - 721981)](882710199 % 6738245, 777207 + -777091, 490866 - 490750, 263795072 % 2029192, 591436 + -591321, 32229 + -32171, 1601839187 % 6964518, -962066 - (-962113), 866055 + -865941, -258298 + 258395, 582520530 % 2787179, -178090 - (-178136), 3399213445 % 14282409, 53432953 % 921256, 2344519222 % 10328278, -181782 + 181886, 126491507 % 626195, 1017491898 % 10174918, 886834 + -886717, 724632897 % 7174582, 768175 - 768074, 933161105 % 5796031, 1512089199 % 11200660, 716025 + -715914, -163792 - (-163902), -873710 + 873826, 193979369 % 1589994, 1215792226 % 7894754, -787961 - (-788077), -365082 + 365128, -17813 + 17912, 45374 - 45263, -487208 - (-487317), 1972057148 % 15053871, 110011625 % 504640, 1894172715 % 12712568, 2745708297 % 13728541, -617411 + 617510, 1661658136 % 12400433, 207536 - 207435, 951727 - 951627, 820323 - 820241, 891605130 % 3962689, -878774 + 878892, 753631729 % 3220648, 898089033 % 11974519, 893269 + -893154, 427502 + -427455, 1042094 + -1042009, 704694 + -704621, 85367 + -85320, -900297 - (-900411), -113749 + 113850, -481488 - (-481590), -120333 - (-120448), 625536 + -625489, 713918936 % 16225428, -529128 - (-529229), 104463142 % 6964203, 546816 - 546716, 903160 + -903045, -158470 + 158517, 2963219559 % 14890550, -375649 - (-375746), -491006 - (-491111), 634506 + -634396, 964350122 % 3781765, -127830 + 127915, 780697 - 780592, 3474662770 % 14240421, 2244844524 % 9200182, 601877 - 601757, 565663 - 565547);
-	(loadstring(game:HttpGet(t)))();
-end;
-local y = false;
-pcall(function(...)
-	if isfile and (readfile and isfile(A)) then
-		local s = readfile(A) or R(2352 - (-36195));
-		local O = string[R(791421 + -752878)](string[R(376867161 % 1513368)](s, R(-246696 - (-285252)), R(-403825 + 442372)));
-		local P = string[R(-706938 - (-745481))](string[R(-505126 - (-543655))](t, R(-263936 - (-302492)), R(865719636 % 3917109)));
-		if O == P and O ~= R(-484186 + 522733) then
-			y = true;
-		end;
-	end;
-end);
-if y then
-	q();
-	return;
-end;
-for t, A in ipairs(D:GetChildren()) do
-	if A[R(337597 - 299075)]:match(R(266042 - 227478)) then
-		A:Destroy();
-	end;
-end;
-local w = Instance[R(110612987 % 3252189)](R(-207306 + 245846));
-w[R(456923 - 418401)] = R(929799706 % 12736454);
-w[R(134125 + -95557)] = false;
-w[R(213912 - 175392)] = D;
-local G = Instance[R(-208421 + 246982)](R(707406 + -668837), w);
-G[R(-241044 - (-279610))] = UDim2[R(168174625 % 2627126)](-870978 + 870978, 1741695608 % 12806583, 389828 + -389828, 1378922600 % 8618265);
-G[R(-813883 + 852420)] = UDim2[R(149023 - 110462)](93638.5 - 93638, -514802 - (-514642), 1209881640.5 % 15123520.5, -547939 - (-547839));
-G[R(-342306 + 380856)] = Color3[R(5384252 % 1336431)](-789257 - (-789272), 1014157 - 1014145, 584356 - 584334);
-G[R(963103 + -924548)] = 298783432 % 2196937;
-G[R(736810 + -698276)] = true;
-G[R(788347 - 749806)] = true;
-(Instance[R(-562326 + 600887)](R(-862119 - (-900642)), G))[R(-269596 - (-308147))] = UDim[R(423752 - 385191)](656300 - 656300, 966589036 % 9476363);
-local C = Instance[R(-259799 - (-298360))](R(805779218 % 8057407), G);
-C[R(-92758 + 131297)] = Color3[R(501574 + -463046)](1537241745 % 10047330, 1431469024 % 13132741, 1282209960 % 5233509);
-C[R(688261171 % 7562886)] = -447200.5 - (-447202);
-local e = Instance[R(-527339 - (-565900))](R(110688 + -72128), G);
-e[R(847738 % 101148)] = R(961935559 % 9249010);
-e[R(-223756 + 262318)] = Enum[R(377507 + -338945)][R(-234078 - (-272609))];
-e[R(1083416 - 1044895)] = 667459 - 667446;
-e[R(90850261 % 10090192)] = Color3[R(-1540 - (-40068))](217107033 % 1219701, 41827887 % 6971272, 30669 + -30414);
-e[R(1034011 - 995445)] = UDim2[R(2365984661 % 11266410)](1666826813 % 11416622, 259267190 % 9971815, 981956 + -981956, 248188 + -248158);
-e[R(510625 + -472088)] = UDim2[R(-754225 + 792786)](-132446 - (-132446), -314083 + 314083, 323355585 % 3079577, 2651632422 % 12872002);
-e[R(766875047 % 12571090)] = 3636023 % 279694;
-local Z = Instance[R(-96779 - (-135340))](R(-200934 - (-239501)), G);
-Z[R(-584197 - (-622763))] = UDim2[R(77323 - 38762)](.85, 932687 - 932687, 868059 + -868059, -585392 - (-585426));
-Z[R(-892859 + 931396)] = UDim2[R(-862015 - (-900576))](.075, 387832 + -387832, 616419 - 616419, -221157 - (-221205));
-Z[R(271368 - 232818)] = Color3[R(4112 + 34416)](1131578243 % 6357181, -846016 + 846036, -907284 - (-907319));
-Z[R(-899276 - (-937830))] = R(-472820 - (-511367));
-Z[R(-783590 - (-822107))] = R(2946146888 % 15754590);
-Z[R(-897785 + 936347)] = Enum[R(75127 - 36565)][R(-612331 + 650901)];
-Z[R(240265123 % 1559913)] = 3539593775 % 16311492;
-Z[R(919108 + -880575)] = Color3[R(793169528 % 3172524)](43395747 % 2066452, 1277093367 % 15386664, 1018321 - 1018066);
-Z[R(2742774645 % 13060648)] = Color3[R(-626142 + 664670)](12283612 % 6141741, 684679 + -684549, 2360985260 % 10089680);
-(Instance[R(-45347 + 83908)](R(-95416 + 133939), Z))[R(250 + 38301)] = UDim[R(-21714 - (-60275))](3717017000 % 16021625, 398897011 % 6136877);
-local K = Instance[R(337030 - 298469)](R(-646063 - (-684601)), G);
-K[R(258779646 % 3980632)] = UDim2[R(919243675 % 4295351)](.85, 702175 + -702175, 501799194 % 6433323, 882770 - 882738);
-K[R(15445019 % 75894)] = UDim2[R(-41845 - (-80406))](.075, -471396 - (-471396), 1170085827 % 4937071, 1861297892 % 15641158);
-K[R(1348751916 % 6453174)] = Color3[R(-725194 - (-763722))](77220255 % 15444000, 668748607 % 11530144, -935272 + 935527);
-K[R(291119854 % 3881084)] = R(2922272656 % 12488180);
-K[R(-700435 - (-738997))] = Enum[R(509929 + -471367)][R(25463 - (-13068))];
-K[R(662682412 % 7281801)] = 609636 - 609625;
-K[R(314939 - 276406)] = Color3[R(864848 + -826320)](998889 + -998874, -298201 - (-298211), 17937156 % 1121071);
-(Instance[R(-903882 - (-942443))](R(-304876 + 343399), K))[R(873666301 % 11648370)] = UDim[R(363298223 % 1807262)](1048193510 % 14974193, 180135270 % 978996);
-local H = Instance[R(811170113 % 9656328)](R(361470 - 322932), G);
-H[R(-970986 + 1009552)] = UDim2[R(-487336 - (-525897))](.85, 1018205 - 1018205, 334539700 % 13381588, 962398828 % 13366650);
-H[R(-171431 + 209968)] = UDim2[R(1059064969 % 13934558)](.075, 827295 + -827295, 1402256668 % 9286468, 1846264288 % 10924640);
-H[R(468937669 % 2774551)] = Color3[R(876486 + -837958)](98815828 % 10979532, 472424 - 472394, 2546217631 % 10104038);
-H[R(1289960737 % 13029517)] = R(-702410 + 740956);
-H[R(1005600 - 967038)] = Enum[R(18234454 % 1654172)][R(-746498 - (-785029))];
-H[R(60631 - 22110)] = 642526 + -642516;
-H[R(37444389 % 9351464)] = Color3[R(1487418847 % 13645691)](-905929 - (-906109), -64730 + 64890, -575020 - (-575275));
-(Instance[R(260257433 % 4818868)](R(1168963803 % 12176305), H))[R(-572167 + 610718)] = UDim[R(673352345 % 12948342)](1843993173 % 15239613, 183857514 % 1425252);
-H[R(2626403981 % 16622566)]:Connect(function(...)
-	pcall(function(...)
-		setclipboard(R(544262446 % 2496440));
-	end);
-	H[R(-82950 - (-121504))] = R(-69062 + 107592);
-	task[R(209705 + -171153)](44216407.5 % 3684700.5, function(...)
-		H[R(724238118 % 16459081)] = R(-256948 + 295494);
-	end);
-end);
-local L = Instance[R(966538 - 927977)](R(-383898 - (-422458)), G);
-L[R(906096 - 867530)] = UDim2[R(909238 + -870677)](876864961 % 4871472, 7838312 % 7838312, 2877260925 % 16441491, -662779 + 662799);
-L[R(881323 + -842786)] = UDim2[R(3165861841 % 13645790)](896313950 % 10544870, 230942208 % 2061984, 769170327 % 7929591, 1617623468 % 8650392);
-L[R(792542 + -753985)] = 411102 + -411101;
-L[R(645029180 % 6581537)] = R(-733838 + 772385);
-L[R(47764239 % 15908559)] = Enum[R(1232005843 % 13842329)][R(-497839 - (-536388))];
-L[R(265433 - 226912)] = 167922.5 - 167913;
-L[R(49428504 % 453119)] = Color3[R(-786886 - (-825414))](927821 - 927566, -246323 - (-246403), 116744 - 116664);
-K[R(3490541290 % 16542667)]:Connect(function(...)
-	local s = string[R(-1017904 + 1056447)](string[R(648719 + -610190)](Z[R(2528708678 % 13450373)], R(1096862856 % 8437110), R(383033 + -344486)));
-	local O = string[R(-498504 - (-537047))](string[R(1905826770 % 11016117)](t, R(-256839 - (-295395)), R(1922115018 % 9468357)));
-	if s == O then
-		L[R(1686229741 % 14289756)] = Color3[R(534758582 % 11624349)](397371 - 397371, -385840 - (-386095), 193934730 % 12928974);
-		L[R(-278581 - (-317135))] = R(898502089 % 12141399);
-		pcall(function(...)
-			if writefile then
-				writefile(A, t);
-			end;
-		end);
-		task[R(-429658 - (-468183))](-603985 + 603985.5);
-		q();
-	else
-		L[R(-365851 + 404384)] = Color3[R(873345320 % 12129261)](616277935 % 4221080, 163875 + -163795, -489506 - (-489586));
-		L[R(746703 + -708149)] = R(1250777448 % 12762642);
-	end;
-end);
+-- ============================================================
+-- SACRED AHK VERSION 12.0 | NEW SINGLE KEY SYSTEM
+-- ============================================================
+local REQUIRED_KEY = "sacred"
+local KEY_FILE = "SacredAHK_SavedKey.txt"
+local CONFIG_FILE = "SacredAHK_Config.json"
+
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+
+local player = Players.LocalPlayer or Players:FindFirstChildOfClass("Player")
+local playerGui = player:WaitForChild("PlayerGui", 10)
+
+-- Limpiar config/key vieja (de la key "lucky lucky" o "forever")
+pcall(function()
+    if isfile and readfile then
+        if isfile(KEY_FILE) then
+            local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
+            if savedKey ~= REQUIRED_KEY then
+                delfile(KEY_FILE)
+                if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
+            end
+        end
+    end
+end)
+
+local function _decodeUrl(b)
+    local s = {}
+    for i = 1, #b do
+        local a, k = b[i], 0x5A
+        local r, p = 0, 1
+        while a > 0 or k > 0 do
+            local ra, rk = a % 2, k % 2
+            if ra ~= rk then r = r + p end
+            a, k, p = (a - ra) / 2, (k - rk) / 2, p * 2
+        end
+        s[i] = string.char(r)
+    end
+    return table.concat(s)
+end
+
+-- URL Encriptada (https://raw.githubusercontent.com/iSacredRivals/AHK-/main/AHKMOBILE.lua)
+local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, 63, 62, 8, 51, 44, 59, 54, 41, 117, 27, 18, 17, 119, 117, 55, 59, 51, 52, 117, 27, 18, 17, 23, 21, 24, 19, 22, 31, 116, 54, 47, 59}
+
+local function launchScript()
+    for _, old in ipairs(playerGui:GetChildren()) do
+        if old.Name:match("SacredKeyUI") or old.Name:match("SacredUI") then old:Destroy() end
+    end
+    
+    pcall(function()
+        local rawScript = game:HttpGet(_decodeUrl(_MAIN_URL_BYTES))
+        local fn, compileErr = loadstring(rawScript)
+        if fn then
+            fn()
+        else
+            warn("❌ Error compilando: " .. tostring(compileErr))
+        end
+    end)
+end
+
+-- Verificar si ya puso la key "sacred" antes
+local alreadyValid = false
+pcall(function()
+    if isfile and readfile and isfile(KEY_FILE) then
+        local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
+        if savedKey == REQUIRED_KEY then alreadyValid = true end
+    end
+end)
+
+if alreadyValid then
+    launchScript()
+    return
+end
+
+-- ============================================================
+-- UI SYSTEM
+-- ============================================================
+for _, old in ipairs(playerGui:GetChildren()) do
+    if old.Name:match("SacredKeyUI") then old:Destroy() end
+end
+
+local isSpanish = false
+pcall(function()
+    local loc = game:GetService("LocalizationService").RobloxLocaleId
+    if loc and string.find(string.lower(loc), "es") then isSpanish = true end
+end)
+
+local launcherGui = Instance.new("ScreenGui")
+launcherGui.Name = "SacredKeyUI"
+launcherGui.ResetOnSpawn = false
+launcherGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+launcherGui.Parent = playerGui
+
+-- 1. COMPACT POPUP
+local popFrame = Instance.new("Frame", launcherGui)
+popFrame.Name = "SacredUpdatePopup"
+popFrame.AutomaticSize = Enum.AutomaticSize.XY
+popFrame.Size = UDim2.new(0, 0, 0, 0)
+popFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+popFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+popFrame.BackgroundColor3 = Color3.fromRGB(12, 10, 20)
+popFrame.BorderSizePixel = 0
+popFrame.Active = true
+popFrame.Draggable = true
+
+Instance.new("UICorner", popFrame).CornerRadius = UDim.new(0, 16)
+local popStroke = Instance.new("UIStroke", popFrame)
+popStroke.Color = Color3.fromRGB(255, 0, 50)
+popStroke.Thickness = 1.2
+
+local popPadding = Instance.new("UIPadding", popFrame)
+popPadding.PaddingTop = UDim.new(0, 12)
+popPadding.PaddingBottom = UDim.new(0, 12)
+popPadding.PaddingLeft = UDim.new(0, 14)
+popPadding.PaddingRight = UDim.new(0, 14)
+
+local popLayout = Instance.new("UIListLayout", popFrame)
+popLayout.SortOrder = Enum.SortOrder.LayoutOrder
+popLayout.Padding = UDim.new(0, 6)
+popLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+local langBtn = Instance.new("TextButton", popFrame)
+langBtn.Size = UDim2.new(0, 50, 0, 20)
+langBtn.BackgroundColor3 = Color3.fromRGB(30, 25, 45)
+langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
+langBtn.Font = Enum.Font.GothamBold
+langBtn.TextSize = 9
+langBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+langBtn.LayoutOrder = 0
+Instance.new("UICorner", langBtn).CornerRadius = UDim.new(0, 6)
+
+local popTitle = Instance.new("TextLabel", popFrame)
+popTitle.AutomaticSize = Enum.AutomaticSize.XY
+popTitle.BackgroundTransparency = 1
+popTitle.Text = "✨ Update 12"
+popTitle.Font = Enum.Font.GothamBlack
+popTitle.TextSize = 15
+popTitle.TextColor3 = Color3.fromRGB(255, 0, 50)
+popTitle.LayoutOrder = 1
+
+local popWarning = Instance.new("TextLabel", popFrame)
+popWarning.AutomaticSize = Enum.AutomaticSize.Y
+popWarning.Size = UDim2.new(0, 230, 0, 0)
+popWarning.BackgroundTransparency = 1
+popWarning.Font = Enum.Font.GothamBlack
+popWarning.TextSize = 8.5
+popWarning.TextColor3 = Color3.fromRGB(255, 255, 0)
+popWarning.TextWrapped = true
+popWarning.TextXAlignment = Enum.TextXAlignment.Center
+popWarning.LayoutOrder = 2
+popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
+
+local popContent = Instance.new("TextLabel", popFrame)
+popContent.AutomaticSize = Enum.AutomaticSize.Y
+popContent.Size = UDim2.new(0, 230, 0, 0)
+popContent.BackgroundTransparency = 1
+popContent.Font = Enum.Font.GothamBold
+popContent.TextSize = 8.5
+popContent.TextColor3 = Color3.fromRGB(200, 200, 200)
+popContent.TextWrapped = true
+popContent.TextXAlignment = Enum.TextXAlignment.Left
+popContent.TextYAlignment = Enum.TextYAlignment.Top
+popContent.LayoutOrder = 3
+
+if isSpanish then
+    popContent.Text = "Se arreglaron bugs. Sanguine Z manual/auto deshabilitado temporalmente. Cosas como Soul Guitar glitch aún funcionan sin widget. Dudas o sugerencias a mi Discord."
+else
+    popContent.Text = "Bug fixes added. Sanguine Z manual/auto disabled temporarily! Some things like Soul Guitar glitch still work without widget. Suggestions or questions to my Discord."
+end
+
+local getStartedBtn = Instance.new("TextButton", popFrame)
+getStartedBtn.Size = UDim2.new(0, 120, 0, 28)
+getStartedBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
+getStartedBtn.Font = Enum.Font.GothamBlack
+getStartedBtn.TextSize = 10
+getStartedBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getStartedBtn.LayoutOrder = 4
+Instance.new("UICorner", getStartedBtn).CornerRadius = UDim.new(0, 8)
+
+-- 2. KEY SYSTEM
+local keyCard = Instance.new("Frame", launcherGui)
+keyCard.Size = UDim2.new(0, 320, 0, 180)
+keyCard.Position = UDim2.new(0.5, -160, 0.5, -90)
+keyCard.BackgroundColor3 = Color3.fromRGB(12, 10, 20)
+keyCard.BorderSizePixel = 0
+keyCard.Active = true
+keyCard.Draggable = true
+keyCard.Visible = false
+Instance.new("UICorner", keyCard).CornerRadius = UDim.new(0, 16)
+local keyStroke = Instance.new("UIStroke", keyCard)
+keyStroke.Color = Color3.fromRGB(255, 0, 50)
+keyStroke.Thickness = 1.2
+
+local keyTitle = Instance.new("TextLabel", keyCard)
+keyTitle.Text = "🔑 KEY SYSTEM"
+keyTitle.Font = Enum.Font.GothamBlack
+keyTitle.TextSize = 13
+keyTitle.TextColor3 = Color3.fromRGB(255, 0, 50)
+keyTitle.Size = UDim2.new(1, 0, 0, 25)
+keyTitle.Position = UDim2.new(0, 0, 0, 10)
+keyTitle.BackgroundTransparency = 1
+
+local input = Instance.new("TextBox", keyCard)
+input.Size = UDim2.new(0.9, 0, 0, 30)
+input.Position = UDim2.new(0.05, 0, 0, 42)
+input.BackgroundColor3 = Color3.fromRGB(22, 18, 32)
+input.Text = ""
+input.PlaceholderText = isSpanish and "Key aquí..." or "Key here..."
+input.Font = Enum.Font.GothamBold
+input.TextSize = 10
+input.TextColor3 = Color3.fromRGB(255, 255, 255)
+input.PlaceholderColor3 = Color3.fromRGB(140, 140, 150)
+input.ClearTextOnFocus = false
+Instance.new("UICorner", input).CornerRadius = UDim.new(0, 6)
+
+local submit = Instance.new("TextButton", keyCard)
+submit.Size = UDim2.new(0.45, 0, 0, 28)
+submit.Position = UDim2.new(0.05, 0, 0, 80)
+submit.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+submit.Text = isSpanish and "VERIFICAR" or "VERIFY"
+submit.Font = Enum.Font.GothamBlack
+submit.TextSize = 9
+submit.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 6)
+
+local getDiscordBtn = Instance.new("TextButton", keyCard)
+getDiscordBtn.Size = UDim2.new(0.45, 0, 0, 28)
+getDiscordBtn.Position = UDim2.new(0.5, 0, 0, 80)
+getDiscordBtn.BackgroundColor3 = Color3.fromRGB(35, 28, 50)
+getDiscordBtn.Text = "💬 Discord"
+getDiscordBtn.Font = Enum.Font.GothamBold
+getDiscordBtn.TextSize = 9
+getDiscordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", getDiscordBtn).CornerRadius = UDim.new(0, 6)
+
+local status = Instance.new("TextLabel", keyCard)
+status.Size = UDim2.new(1, -20, 0, 20)
+status.Position = UDim2.new(0, 10, 0, 115)
+status.BackgroundTransparency = 1
+status.Text = ""
+status.Font = Enum.Font.GothamBold
+status.TextSize = 8.5
+status.TextColor3 = Color3.fromRGB(255, 60, 60)
+status.TextXAlignment = Enum.TextXAlignment.Center
+
+langBtn.MouseButton1Click:Connect(function()
+    isSpanish = not isSpanish
+    langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
+    getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
+    input.PlaceholderText = isSpanish and "Key aquí..." or "Key here..."
+    submit.Text = isSpanish and "VERIFICAR" or "VERIFY"
+    popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
+    if isSpanish then
+        popContent.Text = "Se arreglaron bugs. Sanguine Z manual/auto deshabilitado temporalmente. Cosas como Soul Guitar glitch aún funcionan sin widget. Dudas o sugerencias a mi Discord."
+    else
+        popContent.Text = "Bug fixes added. Sanguine Z manual/auto disabled temporarily! Some things like Soul Guitar glitch still work without widget. Suggestions or questions to my Discord."
+    end
+end)
+
+getStartedBtn.MouseButton1Click:Connect(function()
+    popFrame.Visible = false
+    keyCard.Visible = true
+end)
+
+getDiscordBtn.MouseButton1Click:Connect(function()
+    pcall(function() setclipboard("https://discord.gg/rivals") end)
+    status.TextColor3 = Color3.fromRGB(0, 255, 120)
+    status.Text = isSpanish and "¡Link copiado!" or "Link copied!"
+    task.delay(2, function() status.Text = "" end)
+end)
+
+submit.MouseButton1Click:Connect(function()
+    local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
+    if userKey == REQUIRED_KEY then
+        status.TextColor3 = Color3.fromRGB(0, 255, 120)
+        status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
+        pcall(function() if writefile then writefile(KEY_FILE, REQUIRED_KEY) end end)
+        task.wait(0.4)
+        launcherGui:Destroy()
+        launchScript()
+    else
+        -- SI LA KEY ES INCORRECTA, EXPULSAR DEL JUEGO INMEDIATAMENTE
+        player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
+    end
+end)
