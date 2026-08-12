@@ -1,27 +1,24 @@
 -- ============================================================
 -- SACRED AHK VERSION 12.5 | SINGLE LOADER (SAFE LOAD)
 -- ============================================================
-local REQUIRED_KEY = "blue box"
+local REQUIRED_KEY = "bluebox" -- Sin espacios para evitar bugs al guardar/cargar
 local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
 
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 
--- Esperar a que el jugador y su GUI existan de forma segura
 local player = Players.LocalPlayer or Players:WaitForChildOfClass("Player")
 local playerGui = player:WaitForChild("PlayerGui", 15)
 
-if not playerGui then return end -- Si no carga, detiene el script sin errores
+if not playerGui then return end 
 
 pcall(function()
-    if isfile and readfile then
-        if isfile(KEY_FILE) then
-            local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
-            if savedKey ~= REQUIRED_KEY then
-                delfile(KEY_FILE)
-                if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
-            end
+    if isfile and readfile and isfile(KEY_FILE) then
+        local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
+        if savedKey ~= REQUIRED_KEY then
+            delfile(KEY_FILE)
+            if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
         end
     end
 end)
@@ -256,11 +253,17 @@ getDiscordBtn.MouseButton1Click:Connect(function()
 end)
 
 submit.MouseButton1Click:Connect(function()
+    -- Limpiar la key que el usuario escribió: quitar espacios y pasar a minúsculas
     local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
+    
     if userKey == REQUIRED_KEY then
         status.TextColor3 = Color3.fromRGB(0, 255, 120)
         status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
-        pcall(function() if writefile then writefile(KEY_FILE, REQUIRED_KEY) end end)
+        pcall(function() 
+            if writefile then 
+                writefile(KEY_FILE, REQUIRED_KEY) 
+            end 
+        end)
         task.wait(0.4)
         launcherGui:Destroy()
         launchScript()
