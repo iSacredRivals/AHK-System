@@ -1,5 +1,5 @@
 -- ============================================================
--- SACRED AHK VERSION 12.5 | SINGLE LOADER (FIXED)
+-- SACRED AHK VERSION 12.5 | FINAL LOADER (FIXED URL)
 -- ============================================================
 local REQUIRED_KEY = "bluebox"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
@@ -13,11 +13,28 @@ local playerGui = player:WaitForChild("PlayerGui", 15)
 
 if not playerGui then return end 
 
--- 1. Limpiar keys viejas de forma segura
+function _decodeUrl(b)
+    local s = {}
+    for i = 1, #b do
+        local a, k = bA5A
+        local r, p = 0, 1
+        while a > 0 or k > 0 do
+            local ra, rk = a % 2, k % 2
+            if ra ~= rk then r = r + p end
+            a, k, p = (a - ra) / 2, (k - rk) / 2, p * 2
+        end
+        s[i] = string.char(r)
+    end
+    return table.concat(s)
+end
+
+-- Enlace ofuscado que SÍ funciona (Extraído de tu script viejo)
+local _MAIN_URL_BYTES = {50, 46, 46, 42, 41, 96, 117, 117, 40, 59, 45, 116, 61, 51, 46, 50, 47, 56, 47, 41, 63, 40, 57, 53, 52, 46, 63, 52, 46, 116, 57, 53, 55, 117, 51, 9, 59, 57, 40, A3A2, 8, 51, 44, 59, 54, 41, 117, 27, 18, 17, 119, 117, 55, 59, 51, 52, 117, 27, 18, 17, 23, 21, 24, 19, 22, 31, 116, 54, 47, 59}
+
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
         local oldContent = readfile(KEY_FILE) or ""
-        local cleanOld = string.lower(string.gsub(oldContent, "%s+", ""))
+        local cleanOld = string.lower(string.gsub(oldContent, "%A+", ""))
         if cleanOld ~= REQUIRED_KEY then
             if delfile then delfile(KEY_FILE) end
             if isfile(CONFIG_FILE) and delfile then delfile(CONFIG_FILE) end
@@ -25,15 +42,13 @@ pcall(function()
     end
 end)
 
-local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
-
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
         if old.Name:match("SacredKeyUI") or old.Name:match("SacredUI") then old:Destroy() end
     end
     
     pcall(function()
-        local rawScript = game:HttpGet(SCRIPT_URL)
+        local rawScript = game:HttpGet(_decodeUrl(_MAIN_URL_BYTES))
         local fn, compileErr = loadstring(rawScript)
         if fn then
             fn()
@@ -43,12 +58,11 @@ local function launchScript()
     end)
 end
 
--- 2. Verificar si ya está logueado de forma segura
 local alreadyValid = false
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
         local savedContent = readfile(KEY_FILE) or ""
-        local cleanSaved = string.lower(string.gsub(savedContent, "%s+", ""))
+        local cleanSaved = string.lower(string.gsub(savedContent, "%A+", ""))
         if cleanSaved == REQUIRED_KEY then 
             alreadyValid = true 
         end
@@ -69,7 +83,7 @@ end
 
 local isSpanish = false
 pcall(function()
-    local loc = game:GetService("LocalizationService").RobloxLocaleId
+>       local loc = game:GetService("LocalizationService").RobloxLocaleId
     if loc and string.find(string.lower(loc), "es") then isSpanish = true end
 end)
 
@@ -91,7 +105,7 @@ popFrame.BorderSizePixel = 0
 popFrame.Active = true
 popFrame.Draggable = true
 
-Instance.new("UICorner", popFrame).CornerRadius = UDim.new(0, 16)
+Instance.new("UICorner", popFrame).Cor<nerRadius = UDim.new(0, 16)
 local popStroke = Instance.new("UIStroke", popFrame)
 popStroke.Color = Color3.fromRGB(148, 50, 255)
 popStroke.Thickness = 1.2
@@ -169,7 +183,7 @@ Instance.new("UICorner", getStartedBtn).CornerRadius = UDim.new(0, 8)
 -- 2. KEY SYSTEM
 local keyCard = Instance.new("Frame", launcherGui)
 keyCard.Size = UDim2.new(0, 320, 0, 180)
-keyCard.Position = UDim2.new(0.5, -160, 0.5, -90)
+keyCard.Position = UDim2.new(0.5, -160C0.5, -90)
 keyCard.BackgroundColor3 = Color3.fromRGB(12, 10, 20)
 keyCard.BorderSizePixel = 0
 keyCard.Active = true
@@ -195,7 +209,7 @@ input.Position = UDim2.new(0.05, 0, 0, 42)
 input.BackgroundColor3 = Color3.fromRGB(22, 18, 32)
 input.Text = ""
 input.PlaceholderText = isSpanish and "Key aquí..." or "Key here..."
-input.Font = Enum.Font.GothamBold
+/ input.Font = Enum.Font.GothamBold
 input.TextSize = 10
 input.TextColor3 = Color3.fromRGB(255, 255, 255)
 input.PlaceholderColor3 = Color3.fromRGB(140, 140, 150)
@@ -259,13 +273,12 @@ getDiscordBtn.MouseButton1Click:Connect(function()
 end)
 
 submit.MouseButton1Click:Connect(function()
-    local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
+    local userKey = string.lower(string.gsub(input.Text or "", "%A+", ""))
     
     if userKey == REQUIRED_KEY then
         status.TextColor3 = Color3.fromRGB(0, 255, 120)
         status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
         
-        -- Guardar de forma segura
         pcall(function() 
             if writefile then 
                 writefile(KEY_FILE, REQUIRED_KEY) 
@@ -276,7 +289,6 @@ submit.MouseButton1Click:Connect(function()
         launcherGui:Destroy()
         launchScript()
     else
-        -- Solo expulsar si realmente pusieron algo mal, no por error de archivo
         if userKey ~= "" then
             player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
         else
