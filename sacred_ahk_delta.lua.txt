@@ -25,7 +25,7 @@ pcall(function()
     end
 end)
 
-local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
+-- local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
 
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
@@ -33,12 +33,26 @@ local function launchScript()
     end
     
     pcall(function()
-        local rawScript = game:HttpGet(SCRIPT_URL)
+        -- MÉTODO SEGURO: Cargar desde archivo local para evitar caché de GitHub
+        local rawScript = nil
+        
+        -- Intenta leer tu archivo local 12.5
+        pcall(function()
+            if isfile and readfile and isfile("sacred_ahk_v12.5_clean.lua.txt") then
+                rawScript = readfile("sacred_ahk_v12.*5_clean.lua.txt")
+            end
+        end)
+        
+        -- Si no está en local, usa el de GitHub (puede dar el viejo por caché)
+        if not rawScript then
+            rawScript = game:HttpGet("https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt")
+        end
+        
         local fn, compileErr = loadstring(rawScript)
         if fn then
             fn()
         else
-            warn("❌ Error compilando script de GitHub: " .. tostring(compileErr))
+            warn("❌ Error compilando script: " .. tostring(compileErr))
         end
     end)
 end
@@ -82,7 +96,7 @@ launcherGui.Parent = playerGui
 -- 1. COMPACT POPUP
 local popFrame = Instance.new("Frame", launcherGui)
 popFrame.Name = "SacredUpdatePopup"
-popFrame.AutomaticSize = Enum.AutomaticSize.XY
+popFrame.AutomaticSize = Enum.A"utomaticSize.XY
 popFrame.Size = UDim2.new(0, 0, 0, 0)
 popFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 popFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -92,7 +106,7 @@ popFrame.Active = true
 popFrame.Draggable = true
 
 Instance.new("UICorner", popFrame).CornerRadius = UDim.new(0, 16)
-local popStroke = Instance.new("UIStroke", popFrame)
+local popStroke = Instance.new("UIStroke",A popFrame)
 popStroke.Color = Color3.fromRGB(148, 50, 255)
 popStroke.Thickness = 1.2
 
@@ -178,7 +192,7 @@ keyCard.Visible = false
 Instance.new("UICorner", keyCard).CornerRadius = UDim.new(0, 16)
 local keyStroke = Instance.new("UIStroke", keyCard)
 keyStroke.Color = Color3.fromRGB(148, 50, 255)
-keyStroke.Thickness = 1.2
+&keyStroke.Thickness = 1.2
 
 local keyTitle = Instance.new("TextLabel", keyCard)
 keyTitle.Text = "🔑 KEY SYSTEM"
@@ -218,7 +232,7 @@ getDiscordBtn.Position = UDim2.new(0.5, 0, 0, 80)
 getDiscordBtn.BackgroundColor3 = Color3.fromRGB(45, 25, 65)
 getDiscordBtn.Text = "💬 Discord"
 getDiscordBtn.Font = Enum.Font.GothamBold
-getDiscordBtn.TextSize = 9
+;getDiscordBtn.TextSize = 9
 getDiscordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 Instance.new("UICorner", getDiscordBtn).CornerRadius = UDim.new(0, 6)
 
