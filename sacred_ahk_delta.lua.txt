@@ -2,43 +2,34 @@
 -- SACRED AHK VERSION 12.5 | KEYLESS ANNOUNCEMENT
 -- ============================================================
 local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
-
 local player = Players.LocalPlayer or Players:WaitForChildOfClass("Player")
-local playerGui = player:WaitFor%3AWaitForChild("PlayerGui",?15)
+local playerGui = player:WaitForChild("PlayerGui", 15)
 
-if not playerGui then return end 
+if not playerGui then return end
 
-local function launchScript()
-    for _, old in ipairs(playerGui:GetChildren()) do
-        if old.Name:match("SacredKeyUI") or old.Name:match("SacredUI") then old:Destroy() end
-    end
-    
-    pcall(function()
-        loadstring(game:HttpGet("https://)raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"))()
-    end)
-end
-
--- ============================================================
--- UI SYSTEM (PURPLE THEME)
--- ============================================================
+-- Limpiar UI vieja
 for _, old in ipairs(playerGui:GetChildren()) do
-    if old.Name:match("SacredKeyUI") then old.Destroy() end
+    if old.Name:match("SacredKeyUI") then old:Destroy() end
 end
 
+-- Detectar idioma
 local isSpanish = false
 pcall(function()
     local loc = game:GetService("LocalizationService").RobloxLocaleId
     if loc and string.find(string.lower(loc), "es") then isSpanish = true end
 end)
 
+-- Señal para esperar el click
+local continueEvent = Instance.new("BindableEvent")
+
+-- Crear ScreenGui
 local launcherGui = Instance.new("ScreenGui")
 launcherGui.Name = "SacredKeyUI"
-launcherGui9Gui.ResetOnSpawn = false
+launcherGui.ResetOnSpawn = false
 launcherGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-launcherGui.Parent = playerGuiE
+launcherGui.Parent = playerGui
 
--- COMPACT POPUP
+-- POPUP FRAME
 local popFrame = Instance.new("Frame", launcherGui)
 popFrame.Name = "SacredUpdatePopup"
 popFrame.AutomaticSize = Enum.AutomaticSize.XY
@@ -66,6 +57,7 @@ popLayout.SortOrder = Enum.SortOrder.LayoutOrder
 popLayout.Padding = UDim.new(0, 6)
 popLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
+-- BOTÓN IDIOMA
 local langBtn = Instance.new("TextButton", popFrame)
 langBtn.Size = UDim2.new(0, 50, 0, 20)
 langBtn.BackgroundColor3 = Color3.fromRGB(30, 25, 45)
@@ -76,6 +68,7 @@ langBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 langBtn.LayoutOrder = 0
 Instance.new("UICorner", langBtn).CornerRadius = UDim.new(0, 6)
 
+-- TÍTULO
 local popTitle = Instance.new("TextLabel", popFrame)
 popTitle.AutomaticSize = Enum.AutomaticSize.XY
 popTitle.BackgroundTransparency = 1
@@ -85,6 +78,7 @@ popTitle.TextSize = 15
 popTitle.TextColor3 = Color3.fromRGB(148, 50, 255)
 popTitle.LayoutOrder = 1
 
+-- WARNING
 local popWarning = Instance.new("TextLabel", popFrame)
 popWarning.AutomaticSize = Enum.AutomaticSize.Y
 popWarning.Size = UDim2.new(0, 230, 0, 0)
@@ -97,6 +91,7 @@ popWarning.TextXAlignment = Enum.TextXAlignment.Center
 popWarning.LayoutOrder = 2
 popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
 
+-- CONTENIDO
 local popContent = Instance.new("TextLabel", popFrame)
 popContent.AutomaticSize = Enum.AutomaticSize.Y
 popContent.Size = UDim2.new(0, 230, 0, 0)
@@ -115,6 +110,7 @@ else
     popContent.Text = "Sanguine Z no cooldown, Aimbot fixed, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs & more.\n\n🟣 The script is now KEYLESS! Just click Get Started."
 end
 
+-- BOTÓN GET STARTED
 local getStartedBtn = Instance.new("TextButton", popFrame)
 getStartedBtn.Size = UDim2.new(0, 120, 0, 28)
 getStartedBtn.BackgroundColor3 = Color3.fromRGB(148, 50, 255)
@@ -125,6 +121,7 @@ getStartedBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 getStartedBtn.LayoutOrder = 4
 Instance.new("UICorner", getStartedBtn).CornerRadius = UDim.new(0, 8)
 
+-- FUNCIONES DE LOS BOTONES
 langBtn.MouseButton1Click:Connect(function()
     isSpanish = not isSpanish
     langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
@@ -138,11 +135,13 @@ langBtn.MouseButton1Click:Connect(function()
 end)
 
 getStartedBtn.MouseButton1Click:Connect(function()
-    popFrame.Visible = false
-    task.wait(0.2)
     launcherGui:Destroy()
-    launchScript()
+    continueEvent:Fire()
 end)
+
+-- ESPERAR A QUE PRESIONEN GET STARTED
+continueEvent.Event:Wait()
+continueEvent:Destroy()
 
 -- ============================================================
 -- SACRED AHK VERSION 12.5 | LOCAL DEV STANDALONE
