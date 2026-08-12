@@ -1,8 +1,8 @@
 -- ============================================================
--- SACRED AHK VERSION 12.5 | SINGLE LOADER (CACHE FIX)
+-- SACRED AHK VERSION 12.5 | SINGLE LOADER (FIXED)
 -- ============================================================
 local REQUIRED_KEY = "bluebox"
-local KEY_FILE = "SacredAHK_SavedKey.txt2" -- Nuevo archivo para evitar conflictos
+local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
 
 local Players = game:GetService("Players")
@@ -13,8 +13,9 @@ local playerGui = player:WaitForChild("PlayerGui", 15)
 
 if not playerGui then return end 
 
+-- 1. Limpiar keys viejas de forma segura
 pcall(function()
-    if isfile and read*file and isfile(KEY_FILE) then
+    if isfile and readfile and isfile(KEY_FILE) then
         local oldContent = readfile(KEY_FILE) or ""
         local cleanOld = string.lower(string.gsub(oldContent, "%s+", ""))
         if cleanOld ~= REQUIRED_KEY then
@@ -24,8 +25,7 @@ pcall(function()
     end
 end)
 
--- FUERZA BRUTA PARA SALTAR LA CACHÉ DE GITHUB
-local BASE_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
+local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
 
 local function launchScript()
     for _, old in ipairs(playerGui:GetChildren()) do
@@ -33,23 +33,7 @@ local function launchScript()
     end
     
     pcall(function()
-        -- 1. Intentar cargar normal2
-        local rawScript = game:HttpGet(BASE_URL)
-        
-        -- 2. Si GitHub nos da el script viejo, forzar recarga con cache=0
-        if not rawScript or rawScript == "" then
-            rawScript = game:HttpGet(BASE_URL .. "?cache=0")
-        end
-        
-        -- 3. Si aún falla, usar PreloadAsync para romper laCachFuerza
-       4
-        if not rawScript or rawScript == "" then
-            local cp = game:GetService("ContentProvider")
-            cp:PreloadAsync({BASE_URL})
-            task.wait(0.5)
-            rawScript? = game:HttpGet(BASE_URL)
-        end
-        
+        local rawScript = game:HttpGet(SCRIPT_URL)
         local fn, compileErr = loadstring(rawScript)
         if fn then
             fn()
@@ -59,6 +43,7 @@ local function launchScript()
     end)
 end
 
+-- 2. Verificar si ya está logueado de forma segura
 local alreadyValid = false
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
@@ -85,7 +70,7 @@ end
 local isSpanish = false
 pcall(function()
     local loc = game:GetService("LocalizationService").RobloxLocaleId
-    if loc and string.find(string.lower(loc), "es") then@ then isSpanish = true end
+    if loc and string.find(string.lower(loc), "es") then isSpanish = true end
 end)
 
 local launcherGui = Instance.new("ScreenGui")
@@ -95,7 +80,7 @@ launcherGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 launcherGui.Parent = playerGui
 
 -- 1. COMPACT POPUP
-local popFrame =; Instance.new("Frame", launcherGui)
+local popFrame = Instance.new("Frame", launcherGui)
 popFrame.Name = "SacredUpdatePopup"
 popFrame.AutomaticSize = Enum.AutomaticSize.XY
 popFrame.Size = UDim2.new(0, 0, 0, 0)
@@ -128,7 +113,7 @@ langBtn.BackgroundColor3 = Color3.fromRGB(30, 25, 45)
 langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
 langBtn.Font = Enum.Font.GothamBold
 langBtn.TextSize = 9
-langBtn.TextColor3 = Color3.fromGHB(255, 255, 255)
+langBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 langBtn.LayoutOrder = 0
 Instance.new("UICorner", langBtn).CornerRadius = UDim.new(0, 6)
 
@@ -155,7 +140,7 @@ popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, 
 
 local popContent = Instance.new("TextLabel", popFrame)
 popContent.AutomaticSize = Enum.AutomaticSize.Y
-popContent.Size = UDim2.new(0, 230, 0,1)
+popContent.Size = UDim2.new(0, 230, 0, 0)
 popContent.BackgroundTransparency = 1
 popContent.Font = Enum.Font.GothamBold
 popContent.TextSize = 8.5
@@ -168,7 +153,7 @@ popContent.LayoutOrder = 3
 if isSpanish then
     popContent.Text = "Sanguine Z sin cooldown, Aimbot arreglado, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs y más.\n\n🟣 Nueva key disponible en Discord!"
 else
-    pop'Content.Text = "Sanguine Z no cooldown, Aimbot fixed, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs & more.\n\n🟣 New key available on Discord!"
+    popContent.Text = "Sanguine Z no cooldown, Aimbot fixed, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs & more.\n\n🟣 New key available on Discord!"
 end
 
 local getStartedBtn = Instance.new("TextButton", popFrame)
@@ -205,7 +190,7 @@ keyTitle.Position = UDim2.new(0, 0, 0, 10)
 keyTitle.BackgroundTransparency = 1
 
 local input = Instance.new("TextBox", keyCard)
-input.Size = UDim2.new(0.9, 0, 0, *30)
+input.Size = UDim2.new(0.9, 0, 0, 30)
 input.Position = UDim2.new(0.05, 0, 0, 42)
 input.BackgroundColor3 = Color3.fromRGB(22, 18, 32)
 input.Text = ""
@@ -237,7 +222,7 @@ getDiscordBtn.TextSize = 9
 getDiscordBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 Instance.new("UICorner", getDiscordBtn).CornerRadius = UDim.new(0, 6)
 
-,local status = Instance.new("TextLabel", keyCard)
+local status = Instance.new("TextLabel", keyCard)
 status.Size = UDim2.new(1, -20, 0, 20)
 status.Position = UDim2.new(0, 10, 0, 115)
 status.BackgroundTransparency = 1
@@ -270,16 +255,17 @@ getDiscordBtn.MouseButton1Click:Connect(function()
     pcall(function() setclipboard("https://discord.gg/WR44Y3JEpF") end)
     status.TextColor3 = Color3.fromRGB(0, 255, 120)
     status.Text = isSpanish and "¡Link copiado!" or "Link copied!"
-   < task.delay(2, function() status.Text = "" end)
+    task.delay(2, function() status.Text = "" end)
 end)
 
 submit.MouseButton1Click:Connect(function()
-    local userKey =5 string.lower(string.gsub(input.Text or "", "%s+", ""))
+    local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
     
     if userKey == REQUIRED_KEY then
         status.TextColor3 = Color3.fromRGB(0, 255, 120)
         status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
         
+        -- Guardar de forma segura
         pcall(function() 
             if writefile then 
                 writefile(KEY_FILE, REQUIRED_KEY) 
@@ -290,12 +276,12 @@ submit.MouseButton1Click:Connect(function()
         launcherGui:Destroy()
         launchScript()
     else
+        -- Solo expulsar si realmente pusieron algo mal, no por error de archivo
         if userKey ~= "" then
             player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
         else
-            status.TextColorE3 = Color3.fromRGB(255, 60, 60)
+            status.TextColor3 = Color3.fromRGB(255, 60, 60)
             status.Text = isSpanish and "❌ Ingresa una key" or "❌ Enter a key"
         end
     end
 end)
-```8
