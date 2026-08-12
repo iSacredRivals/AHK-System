@@ -1,9 +1,6 @@
 -- ============================================================
 -- SACRED AHK VERSION 12.5 | KEYLESS ANNOUNCEMENT
 -- ============================================================
-local ANNOUNCE_VERSION = "12.5"
-local ANNOUNCE_FILE = "SacredAnnounced_" .. ANNOUNCE_VERSION .. ".txt"
-
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players:WaitForChildOfClass("Player")
 local playerGui = player:WaitForChild("PlayerGui", 15)
@@ -15,37 +12,17 @@ for _, old in ipairs(playerGui:GetChildren()) do
     if old.Name:match("SacredKeyUI") then old:Destroy() end
 end
 
--- ============================================================
--- CHECAR SI YA VIO ESTE ANNOUNCEMENT
--- ============================================================
-local alreadySeen = false
-pcall(function()
-    local data = readfile(ANNOUNCE_FILE)
-    if data == "seen" then
-        alreadySeen = true
-    end
-end)
-
-if alreadySeen then
-    -- Ya le dio continuar antes, saltar announcement
-    -- ============================================================
-    -- 👇 TU SCRIPT SE EJECUTA DIRECTO AQUÍ ABAJO
-    -- ============================================================
-    
-    return -- <- QUITA este return cuando pongas tu script
-end
-
--- ============================================================
--- SI NO LO HA VISTO, MOSTRAR POPUP
--- ============================================================
+-- Detectar idioma
 local isSpanish = false
 pcall(function()
     local loc = game:GetService("LocalizationService").RobloxLocaleId
     if loc and string.find(string.lower(loc), "es") then isSpanish = true end
 end)
 
+-- Señal para esperar el click
 local continueEvent = Instance.new("BindableEvent")
 
+-- Crear ScreenGui
 local launcherGui = Instance.new("ScreenGui")
 launcherGui.Name = "SacredKeyUI"
 launcherGui.ResetOnSpawn = false
@@ -114,11 +91,11 @@ popWarning.TextXAlignment = Enum.TextXAlignment.Center
 popWarning.LayoutOrder = 2
 popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
 
--- CONTENIDO"2.7
+-- CONTENIDO
 local popContent = Instance.new("TextLabel", popFrame)
 popContent.AutomaticSize = Enum.AutomaticSize.Y
 popContent.Size = UDim2.new(0, 230, 0, 0)
-popContent.BackgroundTrans9parency = 1
+popContent.BackgroundTransparency = 1
 popContent.Font = Enum.Font.GothamBold
 popContent.TextSize = 8.5
 popContent.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -144,23 +121,11 @@ getStartedBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 getStartedBtn.LayoutOrder = 4
 Instance.new("UICorner", getStartedBtn).CornerRadius = UDim.new(0, 8)
 
--- BOTÓN RESET (borrar memoria por si quieren ver el announcement otra vez)
-local resetBtn = Instance.new("TextButton", popFrame)
-resetBtn.Size = UDim2.new(0, 120, 0, 18)
-resetBtn.BackgroundColor3 = Color3.fromRGB(25, 20, 35)
-resetBtn.Text = isSpanish and "🔄 Reiniciar memoria" or "🔄 Reset memory"
-resetBtn.Font = Enum.Font.GothamBold
-resetBtn.TextSize = 7.5
-resetBtn.TextColor3 = Color3.fromRGB(120, 120, 120)
-resetBtn.LayoutOrder = 5
-Instance.new("UICorner", resetBtn).CornerRadius = UDim.new(0, 5)
-
--- FUNCIONES
+-- FUNCIONES DE LOS BOTONES
 langBtn.MouseButton1Click:Connect(function()
     isSpanish = not isSpanish
     langBtn.Text = isSpanish and "ES 🌐" or "EN 🌐"
     getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
-    resetBtn.Text = isSpanish and "🔄 Reiniciar memoria" or "🔄 Reset memory"
     popWarning.Text = isSpanish and "⚠️ NO USEN ESTA VERSIÓN DEL SCRIPT EN PC, UNA VERSIÓN PARA PC ESTARÁ DISPONIBLE PRONTO ⚠️" or "⚠️ DO NOT USE THIS SCRIPT VERSION ON PC, A PC VERSION WILL BE AVAILABLE SOON ⚠️"
     if isSpanish then
         popContent.Text = "Sanguine Z sin cooldown, Aimbot arreglado, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs y más.\n\n🟣 ¡El script ahora es SIN KEY! Solo presiona Empezar."
@@ -170,23 +135,18 @@ langBtn.MouseButton1Click:Connect(function()
 end)
 
 getStartedBtn.MouseButton1Click:Connect(function()
-    -- GUARDAR QUE YA VIO ESTE ANNOUNCEMENT
-    pcall(function()
-        writefile(ANNOUNCE_FILE, "seen")
-    end)
     launcherGui:Destroy()
     continueEvent:Fire()
-end)
-
-resetBtn.MouseButton1Click:Connect(function()
-    pcall(function()
-        delfile(ANNOUNCE_FILE)
-    end)
 end)
 
 -- ESPERAR A QUE PRESIONEN GET STARTED
 continueEvent.Event:Wait()
 continueEvent:Destroy()
+
+-- ============================================================
+-- 👇 PON TU SCRIPT AQUÍ ABAJO - SE EJECUTA AL PRESIONAR GET STARTED
+-- ============================================================
+
 
 
 -- ============================================================
