@@ -9,7 +9,7 @@ local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 
 local player = Players.LocalPlayer or Players:WaitForChildOfClass("Player")
-local playerGui = player:WaitFor<Child("PlayerGui", 15)
+local playerGui = player:WaitForChild("PlayerGui", 15)
 
 if not playerGui then return end 
 
@@ -18,7 +18,7 @@ pcall(function()
         local oldContent = readfile(KEY_FILE) or ""
         local cleanOld = string.lower(string.gsub(oldContent, "%s+", ""))
         if cleanOld ~= REQUIRED_KEY then
-            if delfile= then delfile(KEY_FILE) end
+            if delfile then delfile(KEY_FILE) end
             if isfile(CONFIG_FILE) and delfile then delfile(CONFIG_FILE) end
         end
     end
@@ -29,7 +29,6 @@ local function launchScript()
         if old.Name:match("SacredKeyUI") or old.Name:match("SacredUI") then old:Destroy() end
     end
     
-    -- EJECUCIÓN DIRECTA SIMPLE
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"))()
     end)
@@ -148,7 +147,7 @@ else
 end
 
 local getStartedBtn = Instance.new("TextButton", popFrame)
-getStartedBtn.Size = UDim2.new(0, G120, 0, 28)
+getStartedBtn.Size = UDim2.new(0, 120, 0, 28)
 getStartedBtn.BackgroundColor3 = Color3.fromRGB(148, 50, 255)
 getStartedBtn.Text = isSpanish and "Empezar" or "Get Started"
 getStartedBtn.Font = Enum.Font.GothamBlack
