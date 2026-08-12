@@ -1,7 +1,7 @@
 -- ============================================================
--- SACRED AHK VERSION 12.5 | SINGLE LOADER (SAFE LOAD)
+-- SACRED AHK VERSION 12.5 | SINGLE LOADER (FIXED)
 -- ============================================================
-local REQUIRED_KEY = "bluebox" -- Sin espacios para evitar bugs al guardar/cargar
+local REQUIRED_KEY = "bluebox"
 local KEY_FILE = "SacredAHK_SavedKey.txt"
 local CONFIG_FILE = "SacredAHK_Config.json"
 
@@ -13,12 +13,14 @@ local playerGui = player:WaitForChild("PlayerGui", 15)
 
 if not playerGui then return end 
 
+-- 1. Limpiar keys viejas de forma segura
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
-        local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
-        if savedKey ~= REQUIRED_KEY then
-            delfile(KEY_FILE)
-            if isfile(CONFIG_FILE) then delfile(CONFIG_FILE) end
+        local oldContent = readfile(KEY_FILE) or ""
+        local cleanOld = string.lower(string.gsub(oldContent, "%s+", ""))
+        if cleanOld ~= REQUIRED_KEY then
+            if delfile then delfile(KEY_FILE) end
+            if isfile(CONFIG_FILE) and delfile then delfile(CONFIG_FILE) end
         end
     end
 end)
@@ -41,11 +43,15 @@ local function launchScript()
     end)
 end
 
+-- 2. Verificar si ya está logueado de forma segura
 local alreadyValid = false
 pcall(function()
     if isfile and readfile and isfile(KEY_FILE) then
-        local savedKey = string.lower(string.gsub(readfile(KEY_FILE) or "", "%s+", ""))
-        if savedKey == REQUIRED_KEY then alreadyValid = true end
+        local savedContent = readfile(KEY_FILE) or ""
+        local cleanSaved = string.lower(string.gsub(savedContent, "%s+", ""))
+        if cleanSaved == REQUIRED_KEY then 
+            alreadyValid = true 
+        end
     end
 end)
 
@@ -253,21 +259,29 @@ getDiscordBtn.MouseButton1Click:Connect(function()
 end)
 
 submit.MouseButton1Click:Connect(function()
-    -- Limpiar la key que el usuario escribió: quitar espacios y pasar a minúsculas
     local userKey = string.lower(string.gsub(input.Text or "", "%s+", ""))
     
     if userKey == REQUIRED_KEY then
         status.TextColor3 = Color3.fromRGB(0, 255, 120)
         status.Text = isSpanish and "✅ ¡Key Correcta! Cargando..." or "✅ Key Verified! Loading..."
+        
+        -- Guardar de forma segura
         pcall(function() 
             if writefile then 
                 writefile(KEY_FILE, REQUIRED_KEY) 
             end 
         end)
-        task.wait(0.4)
+        
+        task.wait(0.5)
         launcherGui:Destroy()
         launchScript()
     else
-        player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
+        -- Solo expulsar si realmente pusieron algo mal, no por error de archivo
+        if userKey ~= "" then
+            player:Kick(isSpanish and "❌ Key Incorrecta. Has sido expulsado." or "❌ Incorrect Key. You have been kicked.")
+        else
+            status.TextColor3 = Color3.fromRGB(255, 60, 60)
+            status.Text = isSpanish and "❌ Ingresa una key" or "❌ Enter a key"
+        end
     end
 end)
