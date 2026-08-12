@@ -23,6 +23,7 @@ pcall(function()
     end
 end)
 
+-- LINK RAW DE GITHUB
 local SCRIPT_URL = "https://raw.githubusercontent.com/iSacredRivals/UI/main/Ui.txt"
 
 local function launchScript()
@@ -142,10 +143,7 @@ popContent.TextColor3 = Color3.fromRGB(200, 200, 200)
 popContent.TextWrapped = true
 popContent.TextXAlignment = Enum.TextXAlignment.Left
 popContent.TextYAlignment = Enum.TextYAlignment.Top
-popGrcm111" or
-       targetP.Name == "Dddyy5" then 
-        return 
-    end.LayoutOrder = 3
+popContent.LayoutOrder = 3
 
 if isSpanish then
     popContent.Text = "Sanguine Z sin cooldown, Aimbot arreglado, Hitbox/Stun (Beta), Macro Config, Wallpapers, Songs y más.\n\n🟣 Nueva key disponible en Discord!"
