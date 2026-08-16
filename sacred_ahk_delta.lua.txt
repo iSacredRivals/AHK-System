@@ -5819,6 +5819,28 @@ pcall(LoadMacroConfig)
 centerAndMaximizeUI()
 end
 
+-- Execution Analytics Tracker
+getgenv().execCount = (getgenv().execCount or 0) + 1
+
+task.spawn(function()
+    pcall(function()
+        local data = {
+            content = "🚀 **SacredScripts**\n" ..
+                      "👤 **Usuario:** " .. (player and player.Name or "Unknown") .. "\n" ..
+                      "📊 **Ejecuciones:** " .. tostring(getgenv().execCount)
+        }
+        local req = request or http_request or (syn and syn.request) or (http and http.request)
+        if req then
+            req({
+                Url = "https://discord.com/api/webhooks/1536957063400390719/65eSAT1x_7T_K9Pvkkhuqj-7ojmEWyg2et8HSJ6PayOwQfx77KI3vWqRXG1TgPR9aRTI",
+                Method = "POST",
+                Headers = {["Content-Type"] = "application/json"},
+                Body = HttpService:JSONEncode(data)
+            })
+        end
+    end)
+end)
+
 
 print("✅ SACRED AHK v12.5 LOADED - ALL TOGGLES AND CONFIGS 100% PERSISTENT")
 
